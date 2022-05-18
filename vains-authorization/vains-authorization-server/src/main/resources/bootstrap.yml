@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: vains-authorization-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 81b1d78edd1a.c.methodot.com:33152
+      config:
+        file-extension: yaml
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        # 监控客户端配置
+        extension-configs:
+          # 公共配置
+          - data-id: vains-common-${spring.profiles.active}.yaml
+            refresh: true
+  profiles:
+    active: dev

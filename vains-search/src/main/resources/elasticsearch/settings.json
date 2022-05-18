@@ -1,0 +1,23 @@
+{
+    "index" : {
+        "analysis" : {
+            "analyzer" : {
+                "ik_synonym_max" : {
+                    "tokenizer" : "ik_max_word",
+                    "filter" : ["mysql_synonym"]
+                },
+                "ik_synonym_smart" : {
+                    "tokenizer" : "ik_smart",
+                    "filter" : ["mysql_synonym"]
+                }
+            },
+            "filter" : {
+                "mysql_synonym" : {
+                    "type" : "dynamic_synonym",
+                    "synonyms_path" : "MySql",
+                    "interval": 30
+                }
+            }
+        }
+    }
+}

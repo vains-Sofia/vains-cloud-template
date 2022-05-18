@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: vains-search
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        file-extension: yaml
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        # 监控客户端配置
+        extension-configs:
+          # swagger3 配置
+          - data-id: swagger-${spring.profiles.active}.yaml
+            refresh: true
+          # 监控服务客户端配置
+          - data-id: vains-admin-client-${spring.profiles.active}.yaml
+            refresh: true
+  profiles:
+    active: prod
