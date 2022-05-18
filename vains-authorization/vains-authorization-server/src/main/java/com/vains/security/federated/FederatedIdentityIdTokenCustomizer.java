@@ -76,16 +76,19 @@ public final class FederatedIdentityIdTokenCustomizer implements OAuth2TokenCust
 		if (grantTypes.contains(context.getAuthorizationGrantType()) &&
 				OAuth2TokenType.ACCESS_TOKEN.equals(context.getTokenType())) {
 			Authentication principal = context.getPrincipal();
-			SysUser sysUser = (SysUser) principal.getPrincipal();
-			Set<String> authorities = principal.getAuthorities().stream()
-					.map(GrantedAuthority::getAuthority)
-					.collect(Collectors.toSet());
-			// 保存用户ID至token中
-			context.getClaims().claim(JwtClaimsConstants.USER_ID, sysUser.getId());
-			// 保存用户昵称至Token中
-			context.getClaims().claim(JwtClaimsConstants.USER_NICKNAME, sysUser.getNickName());
-			// 保存用户权限至token中
-			context.getClaims().claim(JwtClaimsConstants.AUTHORITIES, authorities);
+			if (principal.getPrincipal() instanceof SysUser) {
+				// 预防客户端模式下类型转换错误
+				SysUser sysUser = (SysUser) principal.getPrincipal();
+				Set<String> authorities = principal.getAuthorities().stream()
+						.map(GrantedAuthority::getAuthority)
+						.collect(Collectors.toSet());
+				// 保存用户ID至token中
+				context.getClaims().claim(JwtClaimsConstants.USER_ID, sysUser.getId());
+				// 保存用户昵称至Token中
+				context.getClaims().claim(JwtClaimsConstants.USER_NICKNAME, sysUser.getNickName());
+				// 保存用户权限至token中
+				context.getClaims().claim(JwtClaimsConstants.AUTHORITIES, authorities);
+			}
 		}
 	}
 
