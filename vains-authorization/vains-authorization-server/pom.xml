@@ -62,6 +62,99 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--表示编译版本配置有效-->
+                    <fork>true</fork>
+                    <!--引入第三方jar包时,不添加则引入的第三方jar不会被打入jar包中-->
+                    <includeSystemScope>true</includeSystemScope>
+                    <!--排除第三方jar文件-->
+                    <includes>
+                        <include>
+                            <groupId>nothing</groupId>
+                            <artifactId>nothing</artifactId>
+                        </include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 将所有依赖的jar文件复制到target/lib目录 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <!--复制到哪个路径，${project.build.directory} 缺醒为 target，其他内置参数见下面解释-->
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 指定启动类，指定配置文件，将依赖打成外部jar包 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!-- 是否要把第三方jar加入到类构建路径 -->
+                            <addClasspath>true</addClasspath>
+                            <!-- 外部依赖jar包的最终位置 -->
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <!-- 项目启动类 -->
+                            <mainClass>com.vains.AuthorizationServerApplication</mainClass>
+                        </manifest>
+                    </archive>
+                    <!--资源文件不打进jar包中，做到配置跟项目分离的效果-->
+                    <excludes>
+                        <!-- 业务jar中过滤application.properties/yml文件，在jar包外控制 -->
+                        <exclude>*.properties</exclude>
+                        <exclude>*.xml</exclude>
+                        <exclude>*.yml</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <!--拷贝资源文件 copy-resources-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                    <!-- 指定参与构建的resoures-->
+                                    <includes>
+                                        <include>*.**</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${project.build.directory}/config</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
