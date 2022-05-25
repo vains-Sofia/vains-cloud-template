@@ -75,7 +75,7 @@ public class DefaultExceptionHandlerAdvice {
 
     /**
      * 处理Json请求参数异常
-     * @param e 具体的校验异常
+     * @param e 具体地校验异常
      * @return 返回处理后的异常信息
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -85,7 +85,7 @@ public class DefaultExceptionHandlerAdvice {
 
     /**
      * 处理Form请求参数异常
-     * @param e 具体的校验异常
+     * @param e 具体地校验异常
      * @return 返回处理后的异常信息
      */
     @ExceptionHandler(BindException.class)
@@ -95,7 +95,7 @@ public class DefaultExceptionHandlerAdvice {
 
     /**
      * 验证异常处理 - @Validated加在controller类上，且在参数列表中直接指定constraints时触发
-     * @param e 具体的校验异常
+     * @param e 具体地校验异常
      * @return 返回处理后的异常信息
      */
     @ExceptionHandler(ConstraintViolationException.class)
