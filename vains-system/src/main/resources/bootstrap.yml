@@ -4,7 +4,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: http://kwqqr48rgo.cdhttp.cn/nacos
+        server-addr: http://948748b9da4b.c.methodot.com
       config:
         file-extension: yaml
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
@@ -14,4 +14,4 @@ spring:
           - data-id: vains-common-${spring.profiles.active}.yaml
             refresh: true
   profiles:
-    active: prod
+    active: dev
