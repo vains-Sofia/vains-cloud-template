@@ -42,6 +42,7 @@ import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.web.filter.CorsFilter;
 
 import java.security.KeyPair;
 import java.security.interfaces.RSAPrivateKey;
@@ -57,6 +58,8 @@ import java.util.UUID;
 @EnableWebSecurity
 @AllArgsConstructor
 public class AuthorizationServerConfig {
+
+    private final CorsFilter corsFilter;
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -97,6 +100,8 @@ public class AuthorizationServerConfig {
                 .csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
                 .apply(authorizationServerConfigurer);
 
+        // 添加允许跨域拦截器
+        http.addFilter(corsFilter);
         http.apply(new FederatedIdentityConfigurer());
         DefaultSecurityFilterChain securityFilterChain = http.formLogin(Customizer.withDefaults()).build();
         //  Custom configuration for Resource Owner Password grant type.
