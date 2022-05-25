@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.NotEmpty;
+
 /**
  * 请求用户列表参数类
  *
@@ -13,6 +15,7 @@ import lombok.Data;
 @ApiModel(value = "用户数据", description = "用户数据页面载体")
 public class UserListRequest {
 
+    @NotEmpty(message = "{system.user.username}")
     @ApiModelProperty("账号")
     private String username;
 

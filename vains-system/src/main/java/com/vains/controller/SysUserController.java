@@ -18,11 +18,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.Assert;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -51,7 +54,7 @@ public class SysUserController {
 
     @ApiOperation("获取用户列表")
     @GetMapping("/getUserList")
-    public Result<IPage<SysUserVo>> getUserList(UserListRequest user, Pagination page) {
+    public Result<IPage<SysUserVo>> getUserList(@Validated UserListRequest user, Pagination page) {
         LambdaQueryWrapper<SysUser> wrapper = Wrappers.lambdaQuery(SysUser.class).like(ObjectUtils.isNotEmpty(user.getNickName()), SysUser::getNickName, user.getNickName())
                 .like(ObjectUtils.isNotEmpty(user.getPhone()), SysUser::getPhone, user.getPhone())
                 .like(ObjectUtils.isNotEmpty(user.getEmail()), SysUser::getEmail, user.getEmail())
@@ -92,7 +95,6 @@ public class SysUserController {
     @ApiOperation("删除用户信息")
     @DeleteMapping("/deleteUser/{id}")
     public Result<String> deleteUser(@PathVariable Integer id) {
-        Assert.notNull(id, "用户ID不能为空！");
         sysUserService.removeById(id);
         return Result.success();
     }
@@ -100,7 +102,6 @@ public class SysUserController {
     @GetMapping("/getById/{id}")
     @ApiOperation("根据ID获取用户信息")
     public Result<SysUserVo> getById(@PathVariable Integer id) {
-        Assert.notNull(id, "用户ID不能为空！");
         SysUser user = sysUserService.getById(id);
         if (user == null) {
             return Result.error("用户不存在");
