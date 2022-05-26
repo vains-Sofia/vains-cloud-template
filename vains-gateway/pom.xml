@@ -123,12 +123,12 @@
                         </manifest>
                     </archive>
                     <!--资源文件不打进jar包中，做到配置跟项目分离的效果-->
-                    <excludes>
-                        <!-- 业务jar中过滤application.properties/yml文件，在jar包外控制 -->
+                    <!--<excludes>
+                        &lt;!&ndash; 业务jar中过滤application.properties/yml文件，在jar包外控制 &ndash;&gt;
                         <exclude>*.properties</exclude>
                         <exclude>*.xml</exclude>
                         <exclude>*.yml</exclude>
-                    </excludes>
+                    </excludes>-->
                 </configuration>
             </plugin>
             <!--拷贝资源文件 copy-resources-->
