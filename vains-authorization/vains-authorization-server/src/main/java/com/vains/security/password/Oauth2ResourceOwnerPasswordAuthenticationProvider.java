@@ -13,14 +13,14 @@ import org.springframework.security.crypto.keygen.StringKeyGenerator;
 import org.springframework.security.oauth2.core.*;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.jwt.*;
-import org.springframework.security.oauth2.server.authorization.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
-import org.springframework.security.oauth2.server.authorization.OAuth2TokenCustomizer;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AccessTokenAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
+import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
+import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
@@ -31,9 +31,13 @@ import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements AuthenticationProvider {
+/**
+ * 处理密码模式
+ * @author vains
+ */
+public class Oauth2ResourceOwnerPasswordAuthenticationProvider implements AuthenticationProvider {
 
-    private static final Logger LOGGER = LogManager.getLogger(OAuth2ResourceOwnerPasswordAuthenticationProvider.class);
+    private static final Logger LOGGER = LogManager.getLogger(Oauth2ResourceOwnerPasswordAuthenticationProvider.class);
 
     private static final StringKeyGenerator DEFAULT_REFRESH_TOKEN_GENERATOR = new Base64StringKeyGenerator(Base64.getUrlEncoder().withoutPadding(), 96);
 
@@ -50,7 +54,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
      * @param authorizationService the authorization service
      * @param jwtEncoder the jwt encoder
      */
-    public OAuth2ResourceOwnerPasswordAuthenticationProvider(AuthenticationManager authenticationManager, OAuth2AuthorizationService authorizationService,
+    public Oauth2ResourceOwnerPasswordAuthenticationProvider(AuthenticationManager authenticationManager, OAuth2AuthorizationService authorizationService,
                                                              JwtEncoder jwtEncoder) {
         Assert.notNull(authorizationService, "authorizationService cannot be null");
         Assert.notNull(jwtEncoder, "jwtEncoder cannot be null");
@@ -78,7 +82,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 
         RegisteredClient registeredClient = clientPrincipal.getRegisteredClient();
 
-        if (registeredClient != null && !registeredClient.getAuthorizationGrantTypes().contains(AuthorizationGrantType.PASSWORD)) {
+        if (registeredClient == null || !registeredClient.getAuthorizationGrantTypes().contains(AuthorizationGrantType.PASSWORD)) {
             throw new OAuth2AuthenticationException(OAuth2ErrorCodes.UNAUTHORIZED_CLIENT);
         }
 
@@ -110,7 +114,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 
         String issuer = this.providerSettings != null ? this.providerSettings.getIssuer() : null;
 
-        JoseHeader.Builder headersBuilder = JwtUtils.headers();
+        JwsHeader.Builder headersBuilder = JwtUtils.headers();
         JwtClaimsSet.Builder claimsBuilder = JwtUtils.accessTokenClaims(
                 registeredClient, issuer, usernamePasswordAuthentication.getName(), authorizedScopes);
 
@@ -125,9 +129,10 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 
         this.jwtCustomizer.customize(context);
 
-        JoseHeader headers = context.getHeaders().build();
+        JwsHeader headers = context.getHeaders().build();
         JwtClaimsSet claims = context.getClaims().build();
-        Jwt jwtAccessToken = this.jwtEncoder.encode(headers, claims);
+        JwtEncoderParameters encoderParameters = JwtEncoderParameters.from(headers, claims);
+        Jwt jwtAccessToken = this.jwtEncoder.encode(encoderParameters);
 
         // Use the scopes after customizing the token
         authorizedScopes = claims.getClaim(OAuth2ParameterNames.SCOPE);
@@ -160,7 +165,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider implements Authen
 
         LOGGER.debug("OAuth2Authorization saved successfully");
 
-        Map<String, Object> tokenAdditionalParameters = new HashMap<>();
+        Map<String, Object> tokenAdditionalParameters = new HashMap<>(8);
         claims.getClaims().forEach((key, value) -> {
             if (!key.equals(OAuth2ParameterNames.SCOPE) &&
                     !key.equals(JwtClaimNames.IAT) &&
