@@ -8,9 +8,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.vains.constant.Constants;
 import com.vains.entity.SysUser;
 import com.vains.model.Result;
-import com.vains.model.SysUserVo;
-import com.vains.model.UserListRequest;
-import com.vains.model.request.Pagination;
+import com.vains.model.request.SaveUserRequest;
+import com.vains.model.request.UpdateUserRequest;
+import com.vains.model.vo.SysUserVo;
+import com.vains.model.request.UserListRequest;
 import com.vains.service.ISysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,12 +21,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -54,12 +51,12 @@ public class SysUserController {
 
     @ApiOperation("获取用户列表")
     @GetMapping("/getUserList")
-    public Result<IPage<SysUserVo>> getUserList(@Validated UserListRequest user, Pagination page) {
+    public Result<IPage<SysUserVo>> getUserList(@Validated UserListRequest user) {
         LambdaQueryWrapper<SysUser> wrapper = Wrappers.lambdaQuery(SysUser.class).like(ObjectUtils.isNotEmpty(user.getNickName()), SysUser::getNickName, user.getNickName())
                 .like(ObjectUtils.isNotEmpty(user.getPhone()), SysUser::getPhone, user.getPhone())
                 .like(ObjectUtils.isNotEmpty(user.getEmail()), SysUser::getEmail, user.getEmail())
                 .like(ObjectUtils.isNotEmpty(user.getUsername()), SysUser::getUsername, user.getUsername());
-        IPage<SysUser> iPage = new Page<>(page.getCurrent(), page.getSize());
+        IPage<SysUser> iPage = new Page<>(user.getCurrent(), user.getSize());
         sysUserService.page(iPage, wrapper);
         IPage<SysUserVo> voPage = new Page<>();
         List<SysUser> records = iPage.getRecords();
@@ -75,19 +72,20 @@ public class SysUserController {
 
     @ApiOperation("添加用户信息")
     @PostMapping("/insertUser")
-    public Result<String> insertUser(@RequestBody SysUser user) {
-        if (ObjectUtils.isEmpty(user.getPassword())) {
-            user.setPassword(Constants.DEFAULT_PASSWORD);
-        }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public Result<String> insertUser(@Validated @RequestBody SaveUserRequest saveUserRequest) {
+        SysUser user = new SysUser();
+        BeanUtils.copyProperties(saveUserRequest, user);
+        user.setPassword(passwordEncoder.encode(saveUserRequest.getPassword()));
         sysUserService.save(user);
         return Result.success();
     }
 
     @ApiOperation("修改用户信息")
     @PutMapping("/updateUser")
-    public Result<String> updateUser(@RequestBody SysUser user) {
-        Assert.notNull(user.getId(), "用户ID不能为空！");
+    public Result<String> updateUser(@Validated @RequestBody UpdateUserRequest updateUserRequest) {
+        SysUser user = new SysUser();
+        BeanUtils.copyProperties(updateUserRequest, user);
+        user.setPassword(passwordEncoder.encode(updateUserRequest.getPassword()));
         sysUserService.updateById(user);
         return Result.success();
     }

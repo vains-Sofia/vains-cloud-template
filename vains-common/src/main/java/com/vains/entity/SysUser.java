@@ -88,6 +88,7 @@ public class SysUser implements UserDetails {
      * 修改时间
      */
     @ApiModelProperty("修改时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
     @ApiModelProperty("权限")

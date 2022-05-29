@@ -1,8 +1,10 @@
-package com.vains.model;
+package com.vains.model.request;
 
+import com.vains.model.request.Pagination;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -12,10 +14,10 @@ import javax.validation.constraints.NotEmpty;
  * @author vains
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "用户数据", description = "用户数据页面载体")
-public class UserListRequest {
+public class UserListRequest extends Pagination {
 
-    @NotEmpty(message = "{system.user.username}")
     @ApiModelProperty("账号")
     private String username;
 

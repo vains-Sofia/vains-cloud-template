@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import javax.validation.ConstraintViolationException;
+import java.sql.DataTruncation;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -104,6 +105,16 @@ public class DefaultExceptionHandlerAdvice {
     }
 
     /**
+     * Sql 异常：数据长度超过字段最大长度问题
+     * @param e 具体地校验异常
+     * @return 返回处理后的异常信息
+     */
+    @ExceptionHandler(DataTruncation.class)
+    public Result<String> dataTruncation(DataTruncation e){
+        return Result.error(HttpStatus.BAD_REQUEST.value(), e.getMessage());
+    }
+
+    /**
      * 转换FieldError列表为错误提示信息
      *
      * @param fieldErrors 字段异常信息
@@ -112,7 +123,7 @@ public class DefaultExceptionHandlerAdvice {
     private String convertFiledErrors(List<FieldError> fieldErrors) {
         return Optional.ofNullable(fieldErrors)
                 .map(fieldErrorsInner -> fieldErrorsInner.stream()
-                        .flatMap(fieldError -> Stream.of(fieldError.getField(), SEPARATOR_COLON, fieldError.getDefaultMessage(), SEPARATOR_COMMA))
+                        .flatMap(fieldError -> Stream.of(fieldError.getField(), fieldError.getDefaultMessage(), SEPARATOR_COMMA))
                         .collect(Collectors.joining()))
                 .map(msg -> msg.substring(0, msg.length() - SEPARATOR_COMMA.length()))
                 .orElse(null);

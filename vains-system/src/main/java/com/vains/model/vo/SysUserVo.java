@@ -1,4 +1,4 @@
-package com.vains.model;
+package com.vains.model.vo;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -25,7 +25,6 @@ import java.time.LocalDateTime;
 public class SysUserVo {
 
     @ApiModelProperty("主键")
-    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     @ApiModelProperty("账号")
@@ -41,7 +40,6 @@ public class SysUserVo {
     private Boolean deleted;
 
     @ApiModelProperty("创建时间")
-    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
     @ApiModelProperty("用户昵称")
