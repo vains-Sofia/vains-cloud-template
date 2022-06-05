@@ -123,6 +123,33 @@ body {
   border: 1px solid rgb(41, 50, 225);
 }
 
+.alert {
+  top: 20px;
+  opacity: 0;
+  width: 100%;
+  z-index: 50;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 弹框样式 */
+.error-alert {
+  width: 25vw;
+  color: red;
+  display: flex;
+  padding: 8px 50px;
+  border-radius: 3px;
+  align-items: center;
+  border: 1px solid rgb(242, 230, 232);
+  background: rgb(252, 240, 240);
+}
+
+.error-alert img {
+  margin-right: 20px;
+}
+
 /*修改提示信息的文本颜色*/
 input::-webkit-input-placeholder {
   /* WebKit browsers */
@@ -144,6 +171,10 @@ input:-ms-input-placeholder {
   .form-signin {
     width: 100%;
   }
+  .error-alert {
+    width: 100%;
+    margin: 0 20px;
+  }
   .form-container {
     width: auto;
     padding: 20px;
@@ -161,6 +192,10 @@ input:-ms-input-placeholder {
     width: 50vw;
   }
 
+  .error-alert {
+    width: 50vw;
+  }
+
   .welcome-text {
     top: 18vh;
   }
@@ -169,6 +204,9 @@ input:-ms-input-placeholder {
 /* 屏幕 > 800px */
 @media (min-width: 800px) and (max-width: 1000px) {
   .form-signin {
+    width: 500px;
+  }
+  .error-alert {
     width: 500px;
   }
 }

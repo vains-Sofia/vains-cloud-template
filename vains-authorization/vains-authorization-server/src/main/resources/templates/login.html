@@ -5,15 +5,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
-          content="width=device-width, initial-scale=1 minimum-scale=1 maximum-scale=1 user-scalable=no"/>
-    <link rel="stylesheet" href="./css/style.css" type="text/css"/>
+          content="width=device-width, initial-scale=1 minimum-scale=1 maximum-scale=1 user-scalable=no" />
+    <link rel="stylesheet" href="./css/style.css" type="text/css" />
     <title>统一认证平台</title>
 </head>
 
 <body>
 <div class="bottom-container">
 </div>
-
+<div class="alert" id="alert">
+    <div class="error-alert">
+        <img src="./image/logo.png" alt="logo" width="30">
+        <div th:text="${param.error}">
+            账号或密码错误
+        </div>
+    </div>
+</div>
 <div class="form-container">
     <div class="welcome-text">
         <img src="./image/logo.png" alt="logo" width="80">
@@ -22,11 +29,12 @@
         </div>
     </div>
     <form class="form-signin" method="post" th:action="@{/login}">
-        <div th:if="${param.error}" class="alert alert-danger" role="alert" th:text="${param.error}">
+        <!-- <div th:if="${param.error}" class="alert alert-danger" role="alert" th:text="${param}">
+           Invalid username or password.
         </div>
         <div th:if="${param.logout}" class="alert alert-success" role="alert">
-            你已成功登出.
-        </div>
+            你已经登出成功.
+        </div> -->
 
         <div class="text-placeholder" style="padding-bottom: 20px;">
             平台登录
@@ -49,7 +57,7 @@
         <a class="btn btn-light btn-block bg-white" href="/oauth2/authorization/github-idp" role="link"
            style="text-transform: none;">
             <img width="24" style="margin-right: 5px;" alt="Sign in with GitHub"
-                 src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"/>
+                 src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
             Github
         </a>
     </form>
@@ -60,5 +68,30 @@
 <script>
     function leave() {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
+    }
+</script>
+<script th:inline="javascript">
+    let error = [[${ param.error }]]
+    if (error) {
+        if (window.Notification) {
+            Notification.requestPermission(function () {
+                if (Notification.permission === 'granted') {
+                    // 用户点击了允许
+                    let n = new Notification('登录失败', {
+                        body: error,
+                        icon: './image/logo.png'
+                    })
+
+                    setTimeout(() => {
+                        n.close();
+                    }, 5000)
+                }
+            })
+        } else {
+            document.getElementById('alert').style.opacity = '0.8';
+            setTimeout(() => {
+                document.getElementById('alert').style.opacity = '0';
+            }, 3000)
+        }
     }
 </script>
