@@ -17,7 +17,7 @@ import java.util.List;
 public class MpGenerateTest {
 
     public static void main(String[] args) {
-        DataSourceConfig.Builder dataSourceBuilder = new DataSourceConfig.Builder("jdbc:mysql://localhost:3306/vains-system?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&serverTimezone=Asia/Shanghai", "root", "root");
+        DataSourceConfig.Builder dataSourceBuilder = new DataSourceConfig.Builder("jdbc:mysql://localhost:3306/vains-auth?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&serverTimezone=Asia/Shanghai", "root", "root");
         FastAutoGenerator.create(dataSourceBuilder)
                 // 全局配置
                 .globalConfig((scanner, builder) -> builder.author(scanner.apply("请输入作者名称？")).outputDir("D:\\mp").fileOverride())

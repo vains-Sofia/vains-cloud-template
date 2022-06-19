@@ -65,6 +65,8 @@ public class AuthorizationServerConfig {
 
     private final JdbcTemplate jdbcTemplate;
 
+    private final RegisteredClientRepository registeredClientRepository;
+
     /**
      * 自定义授权页
      */
@@ -77,14 +79,6 @@ public class AuthorizationServerConfig {
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
         // 用于 OAuth 2.0 授权服务器支持的AbstractHttpConfigurer 。
         OAuth2AuthorizationServerConfigurer<HttpSecurity> authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer<>();
-
-        http.apply(authorizationServerConfigurer.tokenEndpoint((tokenEndpoint) -> tokenEndpoint.accessTokenRequestConverter(
-                new DelegatingAuthenticationConverter(Arrays.asList(
-                        new OAuth2AuthorizationCodeAuthenticationConverter(),
-                        new OAuth2RefreshTokenAuthenticationConverter(),
-                        new OAuth2ClientCredentialsAuthenticationConverter(),
-                        new OAuth2ResourceOwnerPasswordAuthenticationConverter()))
-        )));
 
         // 自定义授权同意页面
         authorizationServerConfigurer
@@ -105,21 +99,7 @@ public class AuthorizationServerConfig {
         // 添加允许跨域拦截器
         http.addFilter(corsFilter);
         http.apply(new FederatedIdentityConfigurer());
-        DefaultSecurityFilterChain securityFilterChain = http.formLogin(Customizer.withDefaults()).build();
-        //  Custom configuration for Resource Owner Password grant type.
-        //  Current implementation has no support for Resource Owner：Password grant type
-        addCustomOauth2ResourceOwnerPasswordAuthenticationProvider(http);
-        return securityFilterChain;
-    }
-
-    /**
-     * 
-     * 客户端信息，基于数据库保存的
-     * @return OAuth 2.0 RegisteredClient存储库
-     */
-    @Bean
-    public RegisteredClientRepository registeredClientRepository() {
-        return new JdbcRegisteredClientRepository(jdbcTemplate);
+        return http.formLogin(Customizer.withDefaults()).build();
     }
 
     /**
@@ -204,34 +184,10 @@ public class AuthorizationServerConfig {
     @Bean
     public OAuth2AuthorizationConsentService authorizationConsentService() {
         // Will be used by the ConsentController
-        return new JdbcOAuth2AuthorizationConsentService(jdbcTemplate, registeredClientRepository());
+        return new JdbcOAuth2AuthorizationConsentService(jdbcTemplate, registeredClientRepository);
     }
 
-    /**
-     * 添加密码模式登陆
-     * @param http HttpSecurity
-     */
-    private void addCustomOauth2ResourceOwnerPasswordAuthenticationProvider(HttpSecurity http) {
-        AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
-        ProviderSettings providerSettings = http.getSharedObject(ProviderSettings.class);
-        OAuth2AuthorizationService authorizationService = http.getSharedObject(OAuth2AuthorizationService.class);
-        JwtEncoder jwtEncoder = http.getSharedObject(JwtEncoder.class);
-        OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer = idTokenCustomizer();
-
-        Oauth2ResourceOwnerPasswordAuthenticationProvider resourceOwnerPasswordAuthenticationProvider =
-                new Oauth2ResourceOwnerPasswordAuthenticationProvider(authenticationManager, authorizationService, jwtEncoder);
-        if (jwtCustomizer != null) {
-            resourceOwnerPasswordAuthenticationProvider.setJwtCustomizer(jwtCustomizer);
-        }
-
-        resourceOwnerPasswordAuthenticationProvider.setProviderSettings(providerSettings);
-
-        // This will add new authentication provider in the list of existing authentication providers.
-        http.authenticationProvider(resourceOwnerPasswordAuthenticationProvider);
-
-    }
-
-    @Bean("idTokenCustomizer")
+    @Bean
     public OAuth2TokenCustomizer<JwtEncodingContext> idTokenCustomizer() {
         return new FederatedIdentityIdTokenCustomizer();
     }
