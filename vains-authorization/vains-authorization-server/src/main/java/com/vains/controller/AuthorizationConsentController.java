@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsent;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.Principal;
@@ -29,6 +31,7 @@ import java.util.*;
  *
  * @author vains
  */
+@Slf4j
 @Controller
 @AllArgsConstructor
 @Api(tags = "自定义授权页面")
@@ -45,7 +48,12 @@ public class AuthorizationConsentController {
             AuthenticationException exception = (AuthenticationException) request.getSession().getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
             if (exception != null) {
                 request.getSession().setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION, null);
-                return "redirect:/login?error=" + URLEncoder.encode(exception.getMessage(), StandardCharsets.UTF_8);
+                try {
+                    return "redirect:/login?error=" + URLEncoder.encode(exception.getMessage(), StandardCharsets.UTF_8.name());
+                } catch (UnsupportedEncodingException e) {
+                    log.error("获取异常信息失败", e);
+                    return "login";
+                }
             }
         }
         return "login";

@@ -114,8 +114,8 @@ public class ClientUtils {
     public static TokenSettingsModel resolveTokenSettingsModel(TokenSettings tokenSettings) {
         TokenSettingsModel model = new TokenSettingsModel();
         model.setReuseRefreshTokens(tokenSettings.isReuseRefreshTokens());
-        model.setAccessTokenTimeToLive(tokenSettings.getAccessTokenTimeToLive().toSeconds());
-        model.setRefreshTokenTimeToLive(tokenSettings.getRefreshTokenTimeToLive().toSeconds());
+        model.setAccessTokenTimeToLive(tokenSettings.getAccessTokenTimeToLive().getSeconds());
+        model.setRefreshTokenTimeToLive(tokenSettings.getRefreshTokenTimeToLive().getSeconds());
         return model;
     }
 
