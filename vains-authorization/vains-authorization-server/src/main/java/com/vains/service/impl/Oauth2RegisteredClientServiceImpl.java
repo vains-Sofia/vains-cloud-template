@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZoneOffset;
 import java.util.stream.Collectors;
@@ -64,9 +65,11 @@ public class Oauth2RegisteredClientServiceImpl extends ServiceImpl<Oauth2Registe
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void register(RegisterClientRequest clientRequest) {
+        long id = IdWorker.getId();
         // 构建参数
-        RegisteredClient registeredClient = RegisteredClient.withId(String.valueOf(IdWorker.getId()))
+        RegisteredClient registeredClient = RegisteredClient.withId(String.valueOf(id))
                 // 转换GrantTypes
                 .authorizationGrantTypes(authenticationGrantTypes -> authenticationGrantTypes.addAll(
                         clientRequest.getAuthorizationGrantTypes()
@@ -97,6 +100,11 @@ public class Oauth2RegisteredClientServiceImpl extends ServiceImpl<Oauth2Registe
                 .redirectUris(uris -> uris.addAll(clientRequest.getRedirectUris()))
                 .build();
         this.save(registeredClient);
+        // 设置头像
+        Oauth2RegisteredClient client = new Oauth2RegisteredClient();
+        client.setId(String.valueOf(id));
+        client.setClientProfile(clientRequest.getClientProfile());
+        this.updateById(client);
     }
 
     /**

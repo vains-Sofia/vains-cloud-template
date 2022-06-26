@@ -29,6 +29,10 @@ public class RegisterClientRequest {
     private String clientName;
 
     @NotEmpty
+    @ApiModelProperty("客户端头像")
+    private String clientProfile;
+
+    @NotEmpty
     @ApiModelProperty("客户端认证方式")
     private Set<String> clientAuthenticationMethods;
 

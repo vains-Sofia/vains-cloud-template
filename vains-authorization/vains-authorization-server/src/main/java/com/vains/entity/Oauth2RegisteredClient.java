@@ -65,6 +65,11 @@ public class Oauth2RegisteredClient implements Serializable {
     private String clientName;
 
     /**
+     * 客户端头像
+     */
+    private String clientProfile;
+
+    /**
      * 客户端认证方式
      */
     @TableField(typeHandler = AuthenticationMethodTypeHandler.class)

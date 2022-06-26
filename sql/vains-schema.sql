@@ -101,6 +101,7 @@ CREATE TABLE `oauth2_registered_client` (
   `client_secret` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL,
   `client_secret_expires_at` datetime DEFAULT NULL,
   `client_name` varchar(200) COLLATE utf8mb4_bin NOT NULL,
+  `client_profile` varchar(1000) COLLATE utf8mb4_bin NULL DEFAULT NULL,
   `client_authentication_methods` varchar(1000) COLLATE utf8mb4_bin NOT NULL,
   `authorization_grant_types` varchar(1000) COLLATE utf8mb4_bin NOT NULL,
   `redirect_uris` varchar(1000) COLLATE utf8mb4_bin DEFAULT NULL,

@@ -1,26 +1,17 @@
 package com.vains.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.vains.entity.Oauth2RegisteredClient;
 import com.vains.model.Result;
 import com.vains.model.request.RegisterClientRequest;
 import com.vains.service.IOauth2RegisteredClientService;
-import com.vains.util.ClientUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.checkerframework.framework.qual.RequiresQualifier;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
-import java.util.Collections;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -49,8 +40,8 @@ public class Oauth2RegisteredClientController {
 
     @GetMapping("/findById/{id}")
     @ApiOperation("根据主键获取客户端")
-    public Result<RegisteredClient> findById(@PathVariable String id) {
-        RegisteredClient registeredClient = registeredClientRepository.findById(id);
+    public Result<Oauth2RegisteredClient> findById(@PathVariable String id) {
+        Oauth2RegisteredClient registeredClient = oauth2RegisteredClientService.getById(id);
         if (registeredClient == null) {
             return Result.error("客户端不存在！");
         }
@@ -59,8 +50,9 @@ public class Oauth2RegisteredClientController {
 
     @ApiOperation("根据客户端Id获取客户端")
     @GetMapping("/findByClientId/{clientId}")
-    public Result<RegisteredClient> findByClientId(@PathVariable String clientId) {
-        RegisteredClient registeredClient = registeredClientRepository.findByClientId(clientId);
+    public Result<Oauth2RegisteredClient> findByClientId(@PathVariable String clientId) {
+        LambdaQueryWrapper<Oauth2RegisteredClient> wrapper = Wrappers.lambdaQuery(Oauth2RegisteredClient.class).eq(Oauth2RegisteredClient::getClientId, clientId);
+        Oauth2RegisteredClient registeredClient = oauth2RegisteredClientService.getOne(wrapper);
         if (registeredClient == null) {
             return Result.error("客户端不存在！");
         }
