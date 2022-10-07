@@ -9,7 +9,6 @@ import com.vains.service.IOauth2RegisteredClientService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +25,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/registeredClient")
 public class Oauth2RegisteredClientController {
-
-    private final RegisteredClientRepository registeredClientRepository;
 
     private final IOauth2RegisteredClientService oauth2RegisteredClientService;
 

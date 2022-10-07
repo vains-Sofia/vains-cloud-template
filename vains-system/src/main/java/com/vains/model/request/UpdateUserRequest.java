@@ -39,7 +39,7 @@ public class UpdateUserRequest {
     @ApiModelProperty("用户邮箱")
     private String email;
 
-    @NotEmpty
+//    @NotEmpty
     @ApiModelProperty("头像")
     private String avatar;
 
@@ -47,8 +47,8 @@ public class UpdateUserRequest {
     @ApiModelProperty("0-男 1-女 2-未知")
     private SexEnum sex;
 
-    @NotEmpty
-    @ApiModelProperty("密码")
-    private String password;
+//    @NotEmpty
+//    @ApiModelProperty("密码")
+//    private String password;
 
 }

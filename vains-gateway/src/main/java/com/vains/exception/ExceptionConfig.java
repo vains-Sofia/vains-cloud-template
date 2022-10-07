@@ -22,7 +22,8 @@ import org.springframework.web.reactive.result.view.ViewResolver;
 import java.util.List;
 
 /**
- * 
+ * 注册网关异常处理
+ * @author vains
  */
 @Configuration
 @RequiredArgsConstructor

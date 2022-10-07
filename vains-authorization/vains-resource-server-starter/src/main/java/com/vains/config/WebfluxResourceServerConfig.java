@@ -2,6 +2,7 @@ package com.vains.config;
 
 import com.vains.properties.WhiteListProperties;
 import com.vains.util.JsonUtils;
+import com.vains.util.SecurityUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.entity.ContentType;
@@ -81,7 +82,7 @@ public class WebfluxResourceServerConfig {
         HttpStatus status = getStatus(e);
         Map<String, String> parameters = createParameters(e);
         ServerHttpResponse response = exchange.getResponse();
-        String wwwAuthenticateHeaderValue = computeWwwAuthenticateHeaderValue(parameters);
+        String wwwAuthenticateHeaderValue = SecurityUtils.computeWwwAuthenticateHeaderValue(parameters);
         response.getHeaders().set(HttpHeaders.WWW_AUTHENTICATE, wwwAuthenticateHeaderValue);
         parameters.put("message", e.getMessage());
         String wwwAuthenticate = JsonUtils.objectCovertToJson(parameters);
@@ -89,28 +90,6 @@ public class WebfluxResourceServerConfig {
         response.setStatusCode(status);
         DataBuffer buffer = response.bufferFactory().wrap(wwwAuthenticate.getBytes(StandardCharsets.UTF_8));
         return response.writeAndFlushWith(Flux.just(Mono.just(buffer)));
-    }
-
-    /**
-     * 构建请求头
-     * @param parameters 参数
-     * @return 返回请求头字符串
-     */
-    private static String computeWwwAuthenticateHeaderValue(Map<String, String> parameters) {
-        StringBuilder wwwAuthenticate = new StringBuilder();
-        wwwAuthenticate.append("Bearer");
-        if (!parameters.isEmpty()) {
-            wwwAuthenticate.append(" ");
-            int i = 0;
-            for (Map.Entry<String, String> entry : parameters.entrySet()) {
-                wwwAuthenticate.append(entry.getKey()).append("=\"").append(entry.getValue()).append("\"");
-                if (i != parameters.size() - 1) {
-                    wwwAuthenticate.append(", ");
-                }
-                i++;
-            }
-        }
-        return wwwAuthenticate.toString();
     }
 
     /**

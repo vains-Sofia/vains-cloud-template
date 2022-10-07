@@ -85,7 +85,7 @@ public class SysUserController {
     public Result<String> updateUser(@Validated @RequestBody UpdateUserRequest updateUserRequest) {
         SysUser user = new SysUser();
         BeanUtils.copyProperties(updateUserRequest, user);
-        user.setPassword(passwordEncoder.encode(updateUserRequest.getPassword()));
+//        user.setPassword(passwordEncoder.encode(updateUserRequest.getPassword()));
         sysUserService.updateById(user);
         return Result.success();
     }

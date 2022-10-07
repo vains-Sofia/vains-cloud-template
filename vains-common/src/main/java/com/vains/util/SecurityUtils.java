@@ -74,7 +74,7 @@ public class SecurityUtils {
      * @param parameters 参数
      * @return 字符串
      */
-    private static String computeWwwAuthenticateHeaderValue(Map<String, String> parameters) {
+    public static String computeWwwAuthenticateHeaderValue(Map<String, String> parameters) {
         StringBuilder wwwAuthenticate = new StringBuilder();
         wwwAuthenticate.append("Bearer");
         if (!parameters.isEmpty()) {

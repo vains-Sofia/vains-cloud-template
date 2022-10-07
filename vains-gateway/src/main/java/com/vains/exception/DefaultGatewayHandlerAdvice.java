@@ -208,7 +208,7 @@ public class DefaultGatewayHandlerAdvice extends DefaultErrorWebExceptionHandler
      */
     @Override
     protected RequestPredicate acceptsTextHtml() {
-        return (serverRequest) -> {
+        return serverRequest -> {
             try {
                 List<MediaType> acceptedMediaTypes = serverRequest.headers().accept();
                 acceptedMediaTypes.removeIf(MediaType.ALL::equalsTypeAndSubtype);
