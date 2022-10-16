@@ -32,6 +32,8 @@ public class JsonUtils {
 
     private final static ObjectMapper MAPPER = new ObjectMapper();
 
+    private final static ObjectMapper OAUTH_MAPPER;
+
     static {
         // 对象的所有字段全部列入，还是其他的选项，可以忽略null等
         MAPPER.setSerializationInclusion(JsonInclude.Include.ALWAYS);
@@ -43,10 +45,12 @@ public class JsonUtils {
         MAPPER.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         // 忽略未知属性，防止json字符串中存在，java对象中不存在对应属性的情况出现错误
         MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        OAUTH_MAPPER = MAPPER.copy();
         ClassLoader classLoader = JdbcRegisteredClientRepository.class.getClassLoader();
         List<Module> securityModules = SecurityJackson2Modules.getModules(classLoader);
-        MAPPER.registerModules(securityModules);
-        MAPPER.registerModule(new OAuth2AuthorizationServerJackson2Module());
+        OAUTH_MAPPER.registerModules(securityModules);
+        OAUTH_MAPPER.registerModule(new OAuth2AuthorizationServerJackson2Module());
     }
 
     /**
@@ -128,6 +132,27 @@ public class JsonUtils {
     }
 
     /**
+     * json字符串转为复杂类型List
+     * @param json json
+     * @param collectionClazz 集合的class
+     * @param elementsClazz 集合中泛型的class
+     * @param <T> 泛型, 代表返回参数的类型
+     * @return 返回T的实例
+     */
+    public static <T> T jsonCovertToObjectAuth(String json, Class<?> collectionClazz, Class<?> ... elementsClazz) {
+        if (json == null || collectionClazz == null || elementsClazz == null) {
+            return null;
+        }
+        try {
+            JavaType javaType = OAUTH_MAPPER.getTypeFactory().constructParametricType(collectionClazz, elementsClazz);
+            return OAUTH_MAPPER.readValue(json, javaType);
+        } catch (IOException e) {
+            log.error("json转换失败,原因:", e);
+        }
+        return null;
+    }
+
+    /**
      * 对象转为json字符串
      * @param o 将要转化的对象
      * @return 返回json字符串
@@ -138,6 +163,23 @@ public class JsonUtils {
         }
         try {
             return o instanceof String ? (String) o : MAPPER.writeValueAsString(o);
+        } catch (IOException e) {
+            log.error("json转换失败,原因:", e);
+        }
+        return null;
+    }
+
+    /**
+     * 对象转为json字符串
+     * @param o 将要转化的对象
+     * @return 返回json字符串
+     */
+    public static String objectCovertToJsonAuth(Object o) {
+        if (o == null) {
+            return null;
+        }
+        try {
+            return o instanceof String ? (String) o : OAUTH_MAPPER.writeValueAsString(o);
         } catch (IOException e) {
             log.error("json转换失败,原因:", e);
         }

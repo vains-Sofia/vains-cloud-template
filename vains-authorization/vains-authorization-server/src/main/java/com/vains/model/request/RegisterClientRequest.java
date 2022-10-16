@@ -2,6 +2,7 @@ package com.vains.model.request;
 
 import com.vains.model.ClientSettingsModel;
 import com.vains.model.TokenSettingsModel;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -14,6 +15,7 @@ import java.util.Set;
  * @author vains
  */
 @Data
+@ApiModel(value = "注册客户端入参", description = "注册客户端入参")
 public class RegisterClientRequest {
 
     @NotEmpty

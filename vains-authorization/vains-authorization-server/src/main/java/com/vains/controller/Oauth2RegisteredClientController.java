@@ -1,16 +1,24 @@
 package com.vains.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.vains.entity.Oauth2RegisteredClient;
 import com.vains.model.Result;
+import com.vains.model.request.FindClientListRequest;
 import com.vains.model.request.RegisterClientRequest;
+import com.vains.model.response.FindClientResponse;
 import com.vains.service.IOauth2RegisteredClientService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -37,23 +45,37 @@ public class Oauth2RegisteredClientController {
 
     @GetMapping("/findById/{id}")
     @ApiOperation("根据主键获取客户端")
-    public Result<Oauth2RegisteredClient> findById(@PathVariable String id) {
+    public Result<FindClientResponse> findById(@PathVariable String id) {
         Oauth2RegisteredClient registeredClient = oauth2RegisteredClientService.getById(id);
         if (registeredClient == null) {
             return Result.error("客户端不存在！");
         }
-        return Result.success(registeredClient);
+        return Result.success(FindClientResponse.covert(registeredClient));
     }
 
     @ApiOperation("根据客户端Id获取客户端")
     @GetMapping("/findByClientId/{clientId}")
-    public Result<Oauth2RegisteredClient> findByClientId(@PathVariable String clientId) {
+    public Result<FindClientResponse> findByClientId(@PathVariable String clientId) {
         LambdaQueryWrapper<Oauth2RegisteredClient> wrapper = Wrappers.lambdaQuery(Oauth2RegisteredClient.class).eq(Oauth2RegisteredClient::getClientId, clientId);
         Oauth2RegisteredClient registeredClient = oauth2RegisteredClientService.getOne(wrapper);
         if (registeredClient == null) {
             return Result.error("客户端不存在！");
         }
-        return Result.success(registeredClient);
+        return Result.success(FindClientResponse.covert(registeredClient));
+    }
+
+    @ApiOperation("获取客户端列表")
+    @GetMapping("/findClientList")
+    public Result<IPage<FindClientResponse>> findClientList(@Validated FindClientListRequest findClient) {
+        LambdaQueryWrapper<Oauth2RegisteredClient> wrapper = Wrappers.lambdaQuery(Oauth2RegisteredClient.class)
+                .like(!ObjectUtils.isEmpty(findClient.getClientId()), Oauth2RegisteredClient::getClientId, findClient.getClientId())
+                .like(!ObjectUtils.isEmpty(findClient.getClientName()), Oauth2RegisteredClient::getClientName, findClient.getClientName());
+        IPage<Oauth2RegisteredClient> iPage = new Page<>(findClient.getCurrent(), findClient.getSize());
+        oauth2RegisteredClientService.page(iPage, wrapper);
+        IPage<FindClientResponse> page = new Page<>(iPage.getCurrent(), iPage.getSize());
+        List<FindClientResponse> findClientResponses = iPage.getRecords().stream().map(FindClientResponse::covert).collect(Collectors.toList());
+        page.setRecords(findClientResponses);
+        return Result.success(page);
     }
 
 }

@@ -16,7 +16,7 @@ public class ClientSettingsTypeHandler extends AbstractJsonTypeHandler<ClientSet
     @Override
     protected ClientSettings parse(String json) {
         // 将设置转为Map
-        Map<String, Object> settings = JsonUtils.jsonCovertToObject(json, Map.class, String.class, Object.class);
+        Map<String, Object> settings = JsonUtils.jsonCovertToObjectAuth(json, Map.class, String.class, Object.class);
         // 通过Map构建bean
         return ClientSettings.withSettings(settings).build();
     }
@@ -25,6 +25,6 @@ public class ClientSettingsTypeHandler extends AbstractJsonTypeHandler<ClientSet
     protected String toJson(ClientSettings clientSettings) {
         Map<String, Object> settings = clientSettings.getSettings();
         // 将设置取出并转为字符串
-        return JsonUtils.objectCovertToJson(settings);
+        return JsonUtils.objectCovertToJsonAuth(settings);
     }
 }

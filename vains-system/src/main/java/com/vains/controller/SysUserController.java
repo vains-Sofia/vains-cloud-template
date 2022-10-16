@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.vains.constant.Constants;
 import com.vains.entity.SysUser;
 import com.vains.model.Result;
 import com.vains.model.request.SaveUserRequest;
@@ -18,11 +17,9 @@ import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -85,7 +82,6 @@ public class SysUserController {
     public Result<String> updateUser(@Validated @RequestBody UpdateUserRequest updateUserRequest) {
         SysUser user = new SysUser();
         BeanUtils.copyProperties(updateUserRequest, user);
-//        user.setPassword(passwordEncoder.encode(updateUserRequest.getPassword()));
         sysUserService.updateById(user);
         return Result.success();
     }

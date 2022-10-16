@@ -18,7 +18,7 @@ public class TokenSettingsTypeHandler extends AbstractJsonTypeHandler<TokenSetti
     @Override
     protected TokenSettings parse(String json) {
         // 将设置转为Map
-        Map<String, Object> settings = JsonUtils.jsonCovertToObject(json, Map.class, String.class, Object.class);
+        Map<String, Object> settings = JsonUtils.jsonCovertToObjectAuth(json, Map.class, String.class, Object.class);
         TokenSettings.Builder builder = TokenSettings.withSettings(settings);
         if (!settings.containsKey(ConfigurationSettingNames.Token.ACCESS_TOKEN_FORMAT)) {
             builder.accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED);
@@ -31,6 +31,6 @@ public class TokenSettingsTypeHandler extends AbstractJsonTypeHandler<TokenSetti
     protected String toJson(TokenSettings tokenSettings) {
         Map<String, Object> settings = tokenSettings.getSettings();
         // 将设置取出并转为字符串
-        return JsonUtils.objectCovertToJson(settings);
+        return JsonUtils.objectCovertToJsonAuth(settings);
     }
 }
