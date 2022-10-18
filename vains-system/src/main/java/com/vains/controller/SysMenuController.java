@@ -12,7 +12,7 @@ import com.vains.service.ISysRoleMenuService;
 import com.vains.service.ISysUserRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -34,8 +34,8 @@ import java.util.stream.Collectors;
  * @since 2022-03-25
  */
 @RestController
-@AllArgsConstructor
 @Api(tags = "菜单接口")
+@RequiredArgsConstructor
 @RequestMapping("/sysMenu")
 public class SysMenuController {
 

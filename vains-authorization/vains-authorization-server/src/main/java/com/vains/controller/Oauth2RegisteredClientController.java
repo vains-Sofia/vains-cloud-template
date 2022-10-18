@@ -8,8 +8,11 @@ import com.vains.entity.Oauth2RegisteredClient;
 import com.vains.model.Result;
 import com.vains.model.request.FindClientListRequest;
 import com.vains.model.request.RegisterClientRequest;
+import com.vains.model.request.UpdateClientRequest;
+import com.vains.model.request.UpdateClientScopesRequest;
 import com.vains.model.response.FindClientResponse;
 import com.vains.service.IOauth2RegisteredClientService;
+import com.vains.util.ClientUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +43,13 @@ public class Oauth2RegisteredClientController {
     @PostMapping("/register")
     public Result<String> register(@Validated @RequestBody RegisterClientRequest clientRequest) {
         oauth2RegisteredClientService.register(clientRequest);
+        return Result.success();
+    }
+
+    @ApiOperation("更新客户端")
+    @PutMapping("/updateClient")
+    public Result<String> updateClient(@Validated @RequestBody UpdateClientRequest updateClient) {
+        oauth2RegisteredClientService.updateClient(updateClient);
         return Result.success();
     }
 
@@ -76,6 +86,16 @@ public class Oauth2RegisteredClientController {
         List<FindClientResponse> findClientResponses = iPage.getRecords().stream().map(FindClientResponse::covert).collect(Collectors.toList());
         page.setRecords(findClientResponses);
         return Result.success(page);
+    }
+
+    @ApiOperation("更改客户端Scopes")
+    @PutMapping("/updateClientScopes")
+    public Result<String> updateClientScopes(@Validated @RequestBody UpdateClientScopesRequest updateClientScopes) {
+        Oauth2RegisteredClient client = new Oauth2RegisteredClient();
+        client.setId(updateClientScopes.getId());
+        client.setScopes(updateClientScopes.getScopes());
+        oauth2RegisteredClientService.updateById(client);
+        return Result.success();
     }
 
 }

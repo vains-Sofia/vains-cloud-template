@@ -1,11 +1,11 @@
 package com.vains.model;
 
-import com.vains.constant.HttpStatusConstants;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
 
@@ -40,7 +40,7 @@ public class Result<T> implements Serializable {
      * @return 返回统一响应
      */
     public static <T> Result<T> success(T data) {
-        return new Result<>(HttpStatusConstants.SUCCESS, ("操作成功."),Boolean.TRUE, data);
+        return new Result<>(HttpStatus.OK.value(), ("操作成功."),Boolean.TRUE, data);
     }
 
     /**
@@ -48,7 +48,7 @@ public class Result<T> implements Serializable {
      * @return 返回统一响应
      */
     public static Result<String> success() {
-        return new Result<>(HttpStatusConstants.SUCCESS, ("操作成功."), Boolean.TRUE, (null));
+        return new Result<>(HttpStatus.OK.value(), ("操作成功."), Boolean.TRUE, (null));
     }
 
     /**
@@ -59,7 +59,7 @@ public class Result<T> implements Serializable {
      * @return 返回统一响应
      */
     public static <T> Result<T> success(String message, T data) {
-        return new Result<>(HttpStatusConstants.SUCCESS, message, Boolean.TRUE, data);
+        return new Result<>(HttpStatus.OK.value(), message, Boolean.TRUE, data);
     }
 
     /**
@@ -69,7 +69,7 @@ public class Result<T> implements Serializable {
      * @return 返回统一响应
      */
     public static <T> Result<T> error(String message) {
-        return new Result<>(HttpStatusConstants.SERVER_ERROR, message, Boolean.FALSE, (null));
+        return new Result<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), message, Boolean.FALSE, (null));
     }
 
     /**
@@ -102,7 +102,7 @@ public class Result<T> implements Serializable {
      * @return 返回统一响应
      */
     public static <T> Result<T> oauth2Error(String message, T data) {
-        return new Result<>(HttpStatusConstants.UNAUTHORIZED, message, Boolean.FALSE, data);
+        return new Result<>(HttpStatus.UNAUTHORIZED.value(), message, Boolean.FALSE, data);
     }
 
 }

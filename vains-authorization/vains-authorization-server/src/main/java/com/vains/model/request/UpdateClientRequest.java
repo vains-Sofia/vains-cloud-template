@@ -17,16 +17,16 @@ import java.util.Set;
  * @author vains
  */
 @Data
-@ApiModel(value = "注册客户端入参", description = "注册客户端入参")
-public class RegisterClientRequest {
+@ApiModel(value = "更新客户端入参", description = "更新客户端入参")
+public class UpdateClientRequest {
+
+    @NotBlank
+    @ApiModelProperty("客户端主键Id")
+    private String id;
 
     @NotBlank
     @ApiModelProperty("客户端Id")
     private String clientId;
-
-    @NotBlank
-    @ApiModelProperty("客户端秘钥")
-    private String clientSecret;
 
     @NotBlank
     @ApiModelProperty("客户端名称")
@@ -47,10 +47,6 @@ public class RegisterClientRequest {
     @NotEmpty
     @ApiModelProperty("回调地址")
     private Set<String> redirectUris;
-
-    @NotEmpty
-    @ApiModelProperty("授权范围")
-    private Set<String> scopes;
 
     @NotNull
     @ApiModelProperty("通过该客户端授权的范围")

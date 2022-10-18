@@ -74,7 +74,7 @@ public class DefaultGatewayHandlerAdvice extends DefaultErrorWebExceptionHandler
         int errorStatus = getHttpStatus(error);
         ServerResponse.BodyBuilder responseBody = ServerResponse.status(errorStatus).contentType(TEXT_HTML_UTF8);
         return Flux.just(getData1(errorStatus).toArray(new String[] {}))
-                .flatMap((viewName) -> renderErrorView(viewName, responseBody, error))
+                .flatMap(viewName -> renderErrorView(viewName, responseBody, error))
                 .switchIfEmpty(this.errorProperties.getWhitelabel().isEnabled()
                         ? renderDefaultErrorView(responseBody, error) : Mono.error(getError(request)))
                 .next();

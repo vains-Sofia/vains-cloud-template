@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.vains.entity.Oauth2RegisteredClient;
 import com.vains.mapper.Oauth2RegisteredClientMapper;
 import com.vains.model.request.RegisterClientRequest;
+import com.vains.model.request.UpdateClientRequest;
 import com.vains.service.IOauth2RegisteredClientService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.vains.util.ClientUtils;
@@ -17,12 +18,13 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.time.ZoneOffset;
 import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author vains
@@ -84,6 +86,8 @@ public class Oauth2RegisteredClientServiceImpl extends ServiceImpl<Oauth2Registe
                                         ClientUtils::resolveClientAuthenticationMethod
                                 ).collect(Collectors.toSet())
                 ))
+                // 客户端Id签发时间
+                .clientIdIssuedAt(Instant.now())
                 // 客户端Id
                 .clientId(clientRequest.getClientId())
                 // 客户端名称
@@ -107,8 +111,24 @@ public class Oauth2RegisteredClientServiceImpl extends ServiceImpl<Oauth2Registe
         this.updateById(client);
     }
 
+    @Override
+    public void updateClient(UpdateClientRequest updateClient) {
+        Oauth2RegisteredClient client = new Oauth2RegisteredClient();
+        client.setId(updateClient.getId());
+        client.setClientId(updateClient.getClientId());
+        client.setClientName(updateClient.getClientName());
+        client.setRedirectUris(updateClient.getRedirectUris());
+        client.setClientProfile(updateClient.getClientProfile());
+        client.setTokenSettings(ClientUtils.resolveTokenSettings(updateClient.getTokenSettings()));
+        client.setClientSettings(ClientUtils.resolveClientSettings(updateClient.getClientSettings()));
+        client.setAuthorizationGrantTypes(updateClient.getAuthorizationGrantTypes().stream().map(ClientUtils::resolveAuthorizationGrantType).collect(Collectors.toSet()));
+        client.setClientAuthenticationMethods(updateClient.getClientAuthenticationMethods().stream().map(ClientUtils::resolveClientAuthenticationMethod).collect(Collectors.toSet()));
+        this.updateById(client);
+    }
+
     /**
      * 构建RegisteredClient
+     *
      * @param client 数据库对应的Entity
      * @return RegisteredClient
      */

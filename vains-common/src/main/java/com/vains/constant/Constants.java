@@ -14,9 +14,4 @@ public final class Constants {
      */
     public static final String DEFAULT_PASSWORD = "123456";
 
-    /**
-     * 默认密码
-     */
-    public static final String IS_FEIGN_CLIENT_REQUEST = "IS_FEIGN_CLIENT_REQUEST";
-
 }

@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.util.Assert;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,11 +23,17 @@ import java.util.stream.Collectors;
  */
 @Data
 @Builder
-@ApiModel(value = "注册客户端入参", description = "注册客户端入参")
+@ApiModel(value = "查询客户端响应", description = "查询客户端响应bean")
 public class FindClientResponse {
+
+    @ApiModelProperty("客户端主键Id")
+    private String id;
 
     @ApiModelProperty("客户端Id")
     private String clientId;
+
+    @ApiModelProperty("客户端Id签发时间")
+    private LocalDateTime clientIdIssuedAt;
 
     @ApiModelProperty("客户端秘钥")
     private String clientSecret;
@@ -63,7 +70,9 @@ public class FindClientResponse {
     public static FindClientResponse covert(Oauth2RegisteredClient client) {
         Assert.notNull(client, "Oauth2RegisteredClient 不能为空.");
         return FindClientResponse.builder()
+                .id(client.getId())
                 .clientId(client.getClientId())
+                .clientIdIssuedAt(client.getClientIdIssuedAt())
                 .clientSecret(client.getClientSecret())
                 .clientName(client.getClientName())
                 .clientProfile(client.getClientProfile())

@@ -9,9 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 import com.vains.handler.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
@@ -45,7 +43,7 @@ public class Oauth2RegisteredClient implements Serializable {
     private String clientId;
 
     /**
-     * 客户端Id过期时间
+     * 客户端Id签发时间
      */
     private LocalDateTime clientIdIssuedAt;
 

@@ -1,5 +1,6 @@
 package com.vains.model;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -9,6 +10,7 @@ import lombok.Data;
  * @author vains
  */
 @Data
+@ApiModel(value = "生成Token设置", description = "生成Token设置模型")
 public class TokenSettingsModel {
 
     @ApiModelProperty("重复使用刷新token")

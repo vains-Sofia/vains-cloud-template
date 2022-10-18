@@ -41,7 +41,7 @@ public class DefaultExceptionHandlerAdvice {
      */
     @ExceptionHandler({AuthenticationException.class})
     public Result<String> exception(AuthenticationException e) {
-        return Result.error(e.getMessage());
+        return Result.error(HttpStatus.UNAUTHORIZED.value(), e.getMessage());
     }
 
     /**
@@ -60,7 +60,7 @@ public class DefaultExceptionHandlerAdvice {
             }
             return Result.error(HttpStatus.BAD_REQUEST.value(), errors.toString());
         }
-        return Result.error("参数转换异常");
+        return Result.error(HttpStatus.BAD_REQUEST.value(), "参数转换异常");
     }
 
     /**
@@ -111,7 +111,7 @@ public class DefaultExceptionHandlerAdvice {
      */
     @ExceptionHandler(DataTruncation.class)
     public Result<String> dataTruncation(DataTruncation e){
-        return Result.error(HttpStatus.BAD_REQUEST.value(), e.getMessage());
+        return Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
     }
 
     /**
