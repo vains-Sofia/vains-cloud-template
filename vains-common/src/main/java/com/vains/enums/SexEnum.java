@@ -1,6 +1,5 @@
 package com.vains.enums;
 
-import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
@@ -8,51 +7,42 @@ import com.fasterxml.jackson.annotation.JsonValue;
  *
  * @author vains
  */
-public enum SexEnum {
+public enum SexEnum implements BaseEnum<SexEnum, Integer> {
 
     /**
      * 男
      */
-    MAN("男", 0),
+    MAN("男", 1),
 
     /**
      * 女
      */
-    WOMAN("女", 1),
+    WOMAN("女", 2),
 
     /**
      * 未知
      */
-    UN_KNOW("未知", 2);
+    UN_KNOW("未知", 3);
 
     /**
      * 性别名
      */
-    private String name;
+    private final String name;
 
     /**
      * 性别值
-     * EnumValue MybatisPlus标记该字段为数据库存储的值
      * JsonValue Json序列化时使用该值
      */
-    @EnumValue
     @JsonValue
-    private Integer value;
+    private final Integer value;
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    @Override
     public Integer getValue() {
         return value;
-    }
-
-    public void setValue(Integer value) {
-        this.value = value;
     }
 
     SexEnum(String name, Integer value) {
