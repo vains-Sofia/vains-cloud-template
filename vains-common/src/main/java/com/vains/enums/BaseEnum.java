@@ -2,17 +2,20 @@ package com.vains.enums;
 
 import com.baomidou.mybatisplus.annotation.IEnum;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.vains.config.covert.EnumJsonDeserializer;
+import com.vains.config.covert.EnumJsonSerializer;
 
 import java.io.Serializable;
 import java.util.Arrays;
 
 /**
  * 枚举基类
- * @author yujinxiang
+ * @author vains
  * @param <E> 子枚举
  * @param <V> 枚举value的类型
  */
+@JsonSerialize(using = EnumJsonSerializer.class)
 @JsonDeserialize(using = EnumJsonDeserializer.class)
 public interface BaseEnum<E extends Enum<E>, V extends Serializable> extends IEnum<V> {
 

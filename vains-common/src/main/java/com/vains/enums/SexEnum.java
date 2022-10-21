@@ -1,12 +1,15 @@
 package com.vains.enums;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * 性别枚举
  *
  * @author vains
  */
+@Getter
+@AllArgsConstructor
 public enum SexEnum implements BaseEnum<SexEnum, Integer> {
 
     /**
@@ -31,22 +34,7 @@ public enum SexEnum implements BaseEnum<SexEnum, Integer> {
 
     /**
      * 性别值
-     * JsonValue Json序列化时使用该值
      */
-    @JsonValue
     private final Integer value;
 
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public Integer getValue() {
-        return value;
-    }
-
-    SexEnum(String name, Integer value) {
-        this.name = name;
-        this.value = value;
-    }
 }

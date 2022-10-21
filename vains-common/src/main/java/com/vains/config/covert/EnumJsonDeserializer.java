@@ -18,7 +18,7 @@ import java.lang.reflect.Type;
 
 /**
 * 枚举反序列化处理
-* @author yujinxiang
+* @author vains
 * @param <T> 枚举类型
 * @param <V> 枚举值的类型
 */
@@ -83,6 +83,6 @@ public class EnumJsonDeserializer<T extends BaseEnum<?, V>, V extends Serializab
             actualTypeArgument = ClassLoader.getSystemClassLoader().loadClass(typeName);
         }
         // 实例化枚举反序列化解析器
-        return new EnumJsonDeserializer(rawClass, actualTypeArgument);
+        return new EnumJsonDeserializer<>((Class<T>) rawClass, (Class<V>) actualTypeArgument);
     }
 }

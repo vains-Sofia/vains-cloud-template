@@ -6,6 +6,7 @@
 package com.vains.exception;
 
 import com.vains.model.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.WebProperties.Resources;
 import org.springframework.boot.autoconfigure.web.reactive.error.DefaultErrorWebExceptionHandler;
@@ -38,6 +39,7 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
  * 网关全局异常拦截器
  * @author vains
  */
+@Slf4j
 public class DefaultGatewayHandlerAdvice extends DefaultErrorWebExceptionHandler {
 
     private static final MediaType TEXT_HTML_UTF8 = new MediaType("text", "html", StandardCharsets.UTF_8);
@@ -111,9 +113,9 @@ public class DefaultGatewayHandlerAdvice extends DefaultErrorWebExceptionHandler
         } else {
             body = "Internal Server Error";
         }
-
+        log.error("Resolve exception [{}], stacktrace: ", throwable.getMessage(), throwable);
         int httpStatus = this.getHttpStatus(error);
-        Result<Object> result = Result.error(httpStatus, body);
+        Result<String> result = Result.error(httpStatus, body);
         return ServerResponse.status(httpStatus).contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(result));
     }
 
