@@ -2,6 +2,7 @@ package com.vains.model.request;
 
 import com.vains.enums.SexEnum;
 import com.vains.enums.TestEnum;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
  * 测试枚举入参
  */
 @Data
+@ApiModel(value = "测试枚举入参", description = "测试枚举入参")
 public class TestEnumRequest {
 
     @NotBlank

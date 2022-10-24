@@ -1,5 +1,6 @@
 package com.vains.controller;
 
+import com.vains.constant.JwtClaimsConstants;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;

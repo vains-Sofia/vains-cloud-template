@@ -1,6 +1,7 @@
 package com.vains.model.request;
 
 import com.vains.enums.SexEnum;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
  * @author vains
  */
 @Data
+@ApiModel(value = "添加用户入参", description = "添加用户入参")
 public class SaveUserRequest {
 
     @NotEmpty

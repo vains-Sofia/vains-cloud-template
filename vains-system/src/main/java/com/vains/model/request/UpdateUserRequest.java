@@ -1,8 +1,7 @@
 package com.vains.model.request;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.vains.enums.SexEnum;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -11,11 +10,12 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 /**
- * 添加用户入参
+* 修改用户入参
  *
  * @author vains
  */
 @Data
+@ApiModel(value = "修改用户入参", description = "修改用户入参")
 public class UpdateUserRequest {
 
     @NotNull

@@ -1,14 +1,18 @@
 package com.vains.util;
 
+import com.vains.constant.JwtClaimsConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.entity.ContentType;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.server.resource.BearerTokenError;
 import org.springframework.security.oauth2.server.resource.BearerTokenErrorCodes;
 import org.springframework.security.oauth2.server.resource.authentication.AbstractOAuth2TokenAuthenticationToken;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -89,6 +93,26 @@ public class SecurityUtils {
             }
         }
         return wwwAuthenticate.toString();
+    }
+
+    /**
+     * 获取用户id
+     * @return 返回登录用户的id
+     */
+    public static Integer getUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!authentication.isAuthenticated()) {
+            log.warn("用户尚未登录.");
+            throw new OAuth2AuthenticationException("用户尚未登录.");
+        }
+        if (!(authentication instanceof JwtAuthenticationToken)) {
+            log.warn("用户登录信息异常.");
+            return null;
+        }
+        // 转为JwtAuthenticationToken，可获取具体的信息
+        JwtAuthenticationToken token = (JwtAuthenticationToken) authentication;
+        // 获取jwt的id，也就是用户id
+        return Integer.valueOf(token.getToken().getId());
     }
 
 }

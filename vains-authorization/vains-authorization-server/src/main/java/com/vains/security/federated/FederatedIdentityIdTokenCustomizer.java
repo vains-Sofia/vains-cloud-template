@@ -82,8 +82,8 @@ public final class FederatedIdentityIdTokenCustomizer implements OAuth2TokenCust
 				Set<String> authorities = principal.getAuthorities().stream()
 						.map(GrantedAuthority::getAuthority)
 						.collect(Collectors.toSet());
-				// 保存用户ID至token中
-				context.getClaims().claim(JwtClaimsConstants.USER_ID, sysUser.getId());
+                // 保存用户ID至token中
+                context.getClaims().id(String.valueOf(sysUser.getId()));
 				// 保存用户昵称至Token中
 				context.getClaims().claim(JwtClaimsConstants.USER_NICKNAME, sysUser.getNickName());
 				// 保存用户权限至token中

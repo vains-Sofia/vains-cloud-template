@@ -15,6 +15,7 @@ import com.vains.service.ISysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
@@ -31,9 +32,9 @@ import java.util.stream.Collectors;
  * @author vains
  */
 @RestController
-@AllArgsConstructor
 @Api(tags = "用户接口")
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class SysUserController {
 
     private final ISysUserService sysUserService;
