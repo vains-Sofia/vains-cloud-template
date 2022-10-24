@@ -1,8 +1,13 @@
 package com.vains.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.vains.entity.SysRole;
 import com.vains.model.Result;
 import com.vains.model.request.AddRoleRequest;
+import com.vains.model.request.FindRolePageRequest;
 import com.vains.model.request.UpdateRoleRequest;
 import com.vains.service.ISysRoleService;
 import com.vains.util.SecurityUtils;
@@ -10,6 +15,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,6 +60,24 @@ public class SysRoleController {
         BeanUtils.copyProperties(updateRole, sysRole);
         boolean result = iSysRoleService.updateById(sysRole);
         return Result.success(result);
+    }
+
+    @GetMapping("/findPage")
+    @ApiOperation("分页查询角色列表")
+    public Result<IPage<SysRole>> getPage(@Validated FindRolePageRequest findRolePage) {
+        IPage<SysRole> iPage = new Page<>(findRolePage.getCurrent(), findRolePage.getSize());
+        LambdaQueryWrapper<SysRole> wrapper = Wrappers.lambdaQuery(SysRole.class)
+                .like(!ObjectUtils.isEmpty(findRolePage.getName()), SysRole::getRoleName, findRolePage.getName())
+                .orderByAsc(SysRole::getSort);
+        iSysRoleService.page(iPage, wrapper);
+        return Result.success(iPage);
+    }
+
+    @ApiOperation("查询角色详情")
+    @GetMapping("/findDetail/{id}")
+    public Result<SysRole> findDetail(@PathVariable Integer id) {
+
+        return Result.success(iSysRoleService.getById(id));
     }
 
 }

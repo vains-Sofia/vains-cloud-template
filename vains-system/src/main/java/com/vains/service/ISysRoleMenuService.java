@@ -2,6 +2,7 @@ package com.vains.service;
 
 import com.vains.entity.SysRoleMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.vains.model.request.BatchResetRoleMenuRequest;
 
 /**
  * <p>
@@ -13,4 +14,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ISysRoleMenuService extends IService<SysRoleMenu> {
 
+    /**
+     * 重置角色所拥有的资源菜单
+     * @param batchResetRoleMenu 角色id和新拥有的资源菜单的id
+     * @return 是否重置成功
+     */
+    boolean batchResetRoleMenu(BatchResetRoleMenuRequest batchResetRoleMenu);
 }

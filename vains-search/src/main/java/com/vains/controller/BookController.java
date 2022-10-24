@@ -4,7 +4,7 @@ import com.vains.entity.Book;
 import com.vains.repository.BookRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author vains
  */
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Api(tags = "测试搜索接口")
 public class BookController {
 

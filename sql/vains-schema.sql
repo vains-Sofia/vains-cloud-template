@@ -2324,7 +2324,7 @@ CREATE TABLE `sys_menu`
     `icon`           varchar(45) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '图标',
     `icon_color`     varchar(16) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '图标颜色',
     `sort`           tinyint(4) DEFAULT NULL COMMENT '排序',
-    `type`           tinyint(4) NOT NULL COMMENT '0:菜单,1:按钮',
+    `type`           tinyint(4) NOT NULL COMMENT '0:菜单,1:按钮,2:Api接口,3:其它',
     `deleted`        tinyint(1) NOT NULL COMMENT '0:启用,1:删除',
     `create_time`    datetime                        NOT NULL COMMENT '创建时间',
     `create_user_id` int(11) NOT NULL COMMENT '创建人',
@@ -2387,7 +2387,7 @@ DROP TABLE IF EXISTS `sys_role_menu`;
 CREATE TABLE `sys_role_menu`
 (
     `id`      int(11) NOT NULL AUTO_INCREMENT COMMENT '角色菜单关联表自增ID',
-    `role_id` varchar(16) NOT NULL COMMENT '角色ID',
+    `role_id` int(11) NOT NULL COMMENT '角色ID',
     `menu_id` int(11) NOT NULL COMMENT '菜单ID',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色菜单多对多关联表';
@@ -2401,7 +2401,7 @@ LOCK
 TABLES `sys_role_menu` WRITE;
 /*!40000 ALTER TABLE `sys_role_menu` DISABLE KEYS */;
 INSERT INTO `sys_role_menu`
-VALUES (1, '1', 1);
+VALUES (1, 1, 1);
 /*!40000 ALTER TABLE `sys_role_menu` ENABLE KEYS */;
 UNLOCK
 TABLES;
@@ -2466,8 +2466,8 @@ DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role`
 (
     `id`      int(11) NOT NULL AUTO_INCREMENT,
-    `role_id` varchar(16) DEFAULT NULL COMMENT '角色ID',
-    `user_id` varchar(18) DEFAULT NULL COMMENT '用户ID',
+    `role_id` int(11) DEFAULT NULL COMMENT '角色ID',
+    `user_id` int(11) DEFAULT NULL COMMENT '用户ID',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2480,7 +2480,7 @@ LOCK
 TABLES `sys_user_role` WRITE;
 /*!40000 ALTER TABLE `sys_user_role` DISABLE KEYS */;
 INSERT INTO `sys_user_role`
-VALUES (1, '1', '1');
+VALUES (1, 1, 1);
 /*!40000 ALTER TABLE `sys_user_role` ENABLE KEYS */;
 UNLOCK
 TABLES;

@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 /**
-* 修改用户入参
+ * 修改用户入参
  *
  * @author vains
  */
@@ -39,7 +39,7 @@ public class UpdateUserRequest {
     @ApiModelProperty("用户邮箱")
     private String email;
 
-//    @NotEmpty
+    //    @NotEmpty
     @ApiModelProperty("头像")
     private String avatar;
 

@@ -2,7 +2,7 @@ package com.vains.controller;
 
 import com.vains.entity.SearchLogs;
 import com.vains.repository.SearchLogsRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  * @author vains
  */
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/search")
 public class SearchLogsController {
 

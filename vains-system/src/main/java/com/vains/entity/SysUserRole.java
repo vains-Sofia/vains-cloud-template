@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
 
 /**
  * <p>
@@ -15,8 +15,9 @@ import lombok.Setter;
  * @author vains
  * @since 2022-03-25
  */
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName("sys_user_role")
 public class SysUserRole implements Serializable {
 
@@ -28,12 +29,12 @@ public class SysUserRole implements Serializable {
     /**
      * 角色ID
      */
-    private String roleId;
+    private Integer roleId;
 
     /**
      * 用户ID
      */
-    private String userId;
+    private Integer userId;
 
 
 }

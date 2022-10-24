@@ -1,6 +1,6 @@
 package com.vains.controller;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
@@ -25,12 +25,10 @@ import java.util.Map;
  */
 @Slf4j
 @Controller
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class LoginController {
 
     private final OAuth2ClientProperties oAuth2ClientProperties;
-
-    private final OAuth2ResourceServerProperties oAuth2ResourceServerProperties;
 
     @GetMapping("/code/login")
     public String login(ServerWebExchange exchange) {

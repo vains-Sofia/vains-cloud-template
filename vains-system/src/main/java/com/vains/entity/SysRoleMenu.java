@@ -3,8 +3,7 @@ package com.vains.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -16,8 +15,9 @@ import java.io.Serializable;
  * @author vains
  * @since 2022-03-25
  */
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName("sys_role_menu")
 public class SysRoleMenu implements Serializable {
 
@@ -32,7 +32,7 @@ public class SysRoleMenu implements Serializable {
     /**
      * 角色ID
      */
-    private String roleId;
+    private Integer roleId;
 
     /**
      * 菜单ID

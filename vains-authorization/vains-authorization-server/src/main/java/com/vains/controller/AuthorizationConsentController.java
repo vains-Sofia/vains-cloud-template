@@ -2,8 +2,8 @@ package com.vains.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
@@ -33,7 +33,7 @@ import java.util.*;
  */
 @Slf4j
 @Controller
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Api(tags = "自定义授权页面")
 public class AuthorizationConsentController {
 

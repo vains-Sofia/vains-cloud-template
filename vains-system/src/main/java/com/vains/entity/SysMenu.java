@@ -1,6 +1,7 @@
 package com.vains.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.vains.enums.MenuTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -58,9 +59,9 @@ public class SysMenu implements Serializable {
     private Integer sort;
 
     /**
-     * 0:菜单,1:按钮
+     * 0:菜单,1:按钮,2:Api接口,3:其它
      */
-    private Integer type;
+    private MenuTypeEnum type;
 
     /**
      * 0:启用,1:删除
