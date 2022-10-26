@@ -44,7 +44,7 @@ public class UpdateUserRequest {
     private String avatar;
 
     @NotNull
-    @ApiModelProperty("0-男 1-女 2-未知")
+    @ApiModelProperty("性别")
     private SexEnum sex;
 
 //    @NotEmpty

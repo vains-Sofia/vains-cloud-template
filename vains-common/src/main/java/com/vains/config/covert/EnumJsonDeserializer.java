@@ -76,7 +76,7 @@ public class EnumJsonDeserializer<T extends BaseEnum<?, V>, V extends Serializab
         // 获取枚举实现的接口
         Type baseInterface = rawClass.getGenericInterfaces()[0];
         Class<?> actualTypeArgument = null;
-        if (baseInterface instanceof ParameterizedType && ((ParameterizedType) baseInterface).getActualTypeArguments().length == 2) {
+        if (baseInterface instanceof ParameterizedType) {
             // 获取父接口的泛型类型
             String typeName = ((ParameterizedType) baseInterface).getActualTypeArguments()[1].getTypeName();
             // 转成具体的class类型，否则将会是 java.lang.Class

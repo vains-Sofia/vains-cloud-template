@@ -23,6 +23,7 @@ import java.util.stream.Stream;
 
 /**
  * 全局异常处理
+ *
  * @author vains
  */
 @RestControllerAdvice
@@ -37,6 +38,7 @@ public class DefaultExceptionHandlerAdvice {
 
     /**
      * 处理认证异常
+     *
      * @param e 异常实例
      * @return 统一响应实体
      */
@@ -47,17 +49,18 @@ public class DefaultExceptionHandlerAdvice {
 
     /**
      * 处理统一的类型转换异常
+     *
      * @param e 转换异常
      * @return 返回处理后的异常信息
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public Result<String> httpMessageNotReadableException(HttpMessageNotReadableException e){
-        if(e.getCause() instanceof InvalidFormatException){
-            InvalidFormatException invalidFormatException = (InvalidFormatException)e.getCause();
+    public Result<String> httpMessageNotReadableException(HttpMessageNotReadableException e) {
+        if (e.getCause() instanceof InvalidFormatException) {
+            InvalidFormatException invalidFormatException = (InvalidFormatException) e.getCause();
             StringBuilder errors = new StringBuilder();
             List<JsonMappingException.Reference> path = invalidFormatException.getPath();
-            for(JsonMappingException.Reference reference : path){
-                errors.append("参数名：").append(reference.getFieldName()).append(" 输入不合法，需要的是 ").append(invalidFormatException.getTargetType().getName()).append(" 类型，").append("提交的值是：").append(invalidFormatException.getValue().toString());
+            for (JsonMappingException.Reference reference : path) {
+                errors.append("参数名：").append(reference.getFieldName()).append(" 输入不合法，需要的是 ").append(invalidFormatException.getTargetType().getName()).append(" 类型，").append("提交的值是：").append(invalidFormatException.getValue());
             }
             return Result.error(HttpStatus.BAD_REQUEST.value(), errors.toString());
         } else if (e.getCause() instanceof JsonParseException) {
@@ -68,52 +71,57 @@ public class DefaultExceptionHandlerAdvice {
 
     /**
      * 处理URL的类型转换异常
+     *
      * @param e 转换异常
      * @return 返回处理后的异常信息
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public Result<String> methodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e){
+    public Result<String> methodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
         String message = String.format("类型转换失败，参数%s需要的类型是：%s, 请传入正确的参数类型", e.getName(), e.getRequiredType());
         return Result.error(HttpStatus.BAD_REQUEST.value(), message);
     }
 
     /**
      * 处理Json请求参数异常
+     *
      * @param e 具体地校验异常
      * @return 返回处理后的异常信息
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Result<String> methodArgumentNotValidException(MethodArgumentNotValidException e){
+    public Result<String> methodArgumentNotValidException(MethodArgumentNotValidException e) {
         return Result.error(HttpStatus.BAD_REQUEST.value(), this.convertFiledErrors(e.getBindingResult().getFieldErrors()));
     }
 
     /**
      * 处理Form请求参数异常
+     *
      * @param e 具体地校验异常
      * @return 返回处理后的异常信息
      */
     @ExceptionHandler(BindException.class)
-    public Result<String> bindException(BindException e){
+    public Result<String> bindException(BindException e) {
         return Result.error(HttpStatus.BAD_REQUEST.value(), this.convertFiledErrors(e.getFieldErrors()));
     }
 
     /**
      * 验证异常处理 - @Validated加在controller类上，且在参数列表中直接指定constraints时触发
+     *
      * @param e 具体地校验异常
      * @return 返回处理后的异常信息
      */
     @ExceptionHandler(ConstraintViolationException.class)
-    public Result<String> methodArgumentNotValidException(ConstraintViolationException e){
+    public Result<String> methodArgumentNotValidException(ConstraintViolationException e) {
         return Result.error(HttpStatus.BAD_REQUEST.value(), this.convertConstraintViolations(e));
     }
 
     /**
      * Sql 异常：数据长度超过字段最大长度问题
+     *
      * @param e 具体地校验异常
      * @return 返回处理后的异常信息
      */
     @ExceptionHandler(DataTruncation.class)
-    public Result<String> dataTruncation(DataTruncation e){
+    public Result<String> dataTruncation(DataTruncation e) {
         return Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
     }
 

@@ -1,9 +1,5 @@
 package com.vains.model.vo;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.vains.enums.SexEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -57,7 +53,7 @@ public class SysUserVo {
     /**
      * 1-男 2-女 3-未知
      */
-    @ApiModelProperty("0-男 1-女 2-未知")
+    @ApiModelProperty("性别")
     private SexEnum sex;
 
     /**

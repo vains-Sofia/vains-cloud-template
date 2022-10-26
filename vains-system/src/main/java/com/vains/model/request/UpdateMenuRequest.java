@@ -45,7 +45,7 @@ public class UpdateMenuRequest {
     private Integer sort;
 
     @NotNull
-    @ApiModelProperty("0:菜单,1:按钮,2:Api接口,3:其它")
+    @ApiModelProperty("菜单类型")
     private MenuTypeEnum type;
 
 }

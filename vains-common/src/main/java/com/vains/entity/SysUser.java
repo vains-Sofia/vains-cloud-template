@@ -81,7 +81,7 @@ public class SysUser implements UserDetails {
     /**
      * 1-男 2-女 3-未知
      */
-    @ApiModelProperty("0-男 1-女 2-未知")
+    @ApiModelProperty("性别")
     private SexEnum sex;
 
     /**

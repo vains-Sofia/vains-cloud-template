@@ -28,7 +28,9 @@ import java.util.List;
 @Slf4j
 public class JsonUtils {
 
-    private JsonUtils() {}
+    private JsonUtils() {
+        throw new UnsupportedOperationException("Utility classes cannot be instantiated.");
+    }
 
     private final static ObjectMapper MAPPER = new ObjectMapper();
 

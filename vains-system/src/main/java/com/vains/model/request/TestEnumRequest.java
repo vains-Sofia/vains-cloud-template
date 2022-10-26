@@ -21,11 +21,11 @@ public class TestEnumRequest {
     private String name;
 
     @NotNull
-    @ApiModelProperty("测试枚举,值为字符串的1、2、3")
+    @ApiModelProperty("测试")
     private TestEnum testEnum;
 
     @NotNull
-    @ApiModelProperty("性别枚举,值为整数的1、2、3")
+    @ApiModelProperty("性别")
     private SexEnum sex;
 
 }
