@@ -1,7 +1,7 @@
 package com.vains.model.request;
 
+import com.vains.enums.MenuTypeEnum;
 import com.vains.enums.SexEnum;
-import com.vains.enums.TestEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -17,12 +17,12 @@ import javax.validation.constraints.NotNull;
 public class TestEnumRequest {
 
     @NotBlank
-    @ApiModelProperty("测试")
+    @ApiModelProperty("测试名称")
     private String name;
 
     @NotNull
-    @ApiModelProperty("测试")
-    private TestEnum testEnum;
+    @ApiModelProperty("测试菜单枚举")
+    private MenuTypeEnum menuType;
 
     @NotNull
     @ApiModelProperty("性别")

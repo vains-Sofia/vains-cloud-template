@@ -112,8 +112,8 @@ public class DefaultGatewayHandlerAdvice extends DefaultErrorWebExceptionHandler
             body = "Request path [" + error.get("path") + "] failed: " + responseStatusException.getMessage();
         } else {
             body = "Internal Server Error";
+            log.error("Resolve exception [{}], stacktrace: ", throwable.getMessage(), throwable);
         }
-        log.error("Resolve exception [{}], stacktrace: ", throwable.getMessage(), throwable);
         int httpStatus = this.getHttpStatus(error);
         Result<String> result = Result.error(httpStatus, body);
         return ServerResponse.status(httpStatus).contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(result));

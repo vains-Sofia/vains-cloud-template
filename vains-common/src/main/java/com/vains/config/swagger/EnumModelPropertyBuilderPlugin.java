@@ -1,10 +1,12 @@
 package com.vains.config.swagger;
 
+import com.baomidou.mybatisplus.annotation.IEnum;
 import com.fasterxml.jackson.databind.introspect.BeanPropertyDefinition;
 import com.vains.enums.BaseEnum;
 import com.vains.util.SwaggerUtils;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.service.AllowableListValues;
 import springfox.documentation.service.AllowableValues;
@@ -21,6 +23,7 @@ import java.util.*;
  */
 @Slf4j
 @Configuration
+@ConditionalOnClass({IEnum.class})
 public class EnumModelPropertyBuilderPlugin implements ModelPropertyBuilderPlugin {
 
     @Override

@@ -1,8 +1,10 @@
 package com.vains.config.swagger;
 
+import com.baomidou.mybatisplus.annotation.IEnum;
 import com.fasterxml.classmate.ResolvedType;
 import com.vains.enums.BaseEnum;
 import com.vains.util.SwaggerUtils;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.ReflectionUtils;
@@ -23,7 +25,15 @@ import springfox.documentation.spi.service.contexts.ParameterContext;
 import java.lang.reflect.Field;
 import java.util.*;
 
+/**
+ * 将Query param或Form data中枚举字段的文档转为自定义显示格式的插件
+ *     转换后的注释为：字段原注释 (枚举中定义的枚举值)
+ *       设置枚举字段在文档中的入参为枚举value，并非默认枚举值
+ *
+ * @author vains
+ */
 @Configuration
+@ConditionalOnClass({IEnum.class})
 public class EnumParameterBuilderPlugin implements ParameterBuilderPlugin, OperationBuilderPlugin {
 
     @Override
