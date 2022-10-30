@@ -49,6 +49,7 @@ public final class UserRepositoryOAuth2UserHandler implements Consumer<OAuth2Use
 		}
 
 		public void save(OAuth2User oauth2User) {
+			System.out.println(oauth2User);
 			this.userCache.put(oauth2User.getName(), oauth2User);
 		}
 

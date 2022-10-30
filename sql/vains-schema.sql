@@ -3929,65 +3929,6 @@ CREATE TABLE `act_ge_bytearray`
 -- Dumping data for table `act_ge_bytearray`
 --
 
-LOCK
-TABLES `act_ge_bytearray` WRITE;
-/*!40000 ALTER TABLE `act_ge_bytearray` DISABLE KEYS */;
-INSERT INTO `act_ge_bytearray`
-VALUES ('a8c65df5-73b5-11ec-b72c-fa94c2855dc7', 1,
-        'D:\\OtherFiles\\IdeaRepository\\vains-cloud-template\\vains-flowable\\target\\classes\\processes\\test1.bpmn20.xml',
-        'a8c65df4-73b5-11ec-b72c-fa94c2855dc7',
-        _binary '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:activiti=\"http://activiti.org/bpmn\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" typeLanguage=\"http://www.w3.org/2001/XMLSchema\" expressionLanguage=\"http://www.w3.org/1999/XPath\" targetNamespace=\"http://www.activiti.org/processdef\">\r\n  <process id=\"test1\" name=\"test1\" isExecutable=\"true\">\r\n    <startEvent id=\"sid-7a87c908-42c5-4bad-9719-a00d2ca3b2dc\"/>\r\n    <userTask id=\"sid-9cc1be4b-0391-466e-ae41-991378d9171c\" name=\"审批\"/>\r\n    <sequenceFlow id=\"sid-88729d18-2d8f-4362-95ca-af85b9eb0bea\" sourceRef=\"sid-7a87c908-42c5-4bad-9719-a00d2ca3b2dc\" targetRef=\"sid-9cc1be4b-0391-466e-ae41-991378d9171c\"/>\r\n    <userTask id=\"sid-d49a2983-136d-4b9b-879d-ea5d36bebcfb\" name=\"财务审核\"/>\r\n    <sequenceFlow id=\"sid-b3f4f8e7-9a41-490e-9842-518634a43b78\" sourceRef=\"sid-9cc1be4b-0391-466e-ae41-991378d9171c\" targetRef=\"sid-d49a2983-136d-4b9b-879d-ea5d36bebcfb\"/>\r\n    <userTask id=\"sid-141652eb-ad22-4872-b5ca-cb8a191cdbd1\" name=\"自己确认\"/>\r\n    <sequenceFlow id=\"sid-b3349de3-0981-49a5-a743-ffb3f8366921\" sourceRef=\"sid-d49a2983-136d-4b9b-879d-ea5d36bebcfb\" targetRef=\"sid-141652eb-ad22-4872-b5ca-cb8a191cdbd1\"/>\r\n    <endEvent id=\"sid-c67b42f3-6b05-4c48-b6a0-d30b849ce54a\" name=\"完成\"/>\r\n    <sequenceFlow id=\"sid-e652a175-e1e5-4540-8d86-b7d86811c2a7\" sourceRef=\"sid-141652eb-ad22-4872-b5ca-cb8a191cdbd1\" targetRef=\"sid-c67b42f3-6b05-4c48-b6a0-d30b849ce54a\"/>\r\n  </process>\r\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_test1\">\r\n    <bpmndi:BPMNPlane bpmnElement=\"test1\" id=\"BPMNPlane_test1\">\r\n      <bpmndi:BPMNShape id=\"shape-4b01e297-1571-4d8d-ba21-fdec76723a4d\" bpmnElement=\"sid-7a87c908-42c5-4bad-9719-a00d2ca3b2dc\">\r\n        <omgdc:Bounds x=\"-1458.2798\" y=\"-791.3\" width=\"30.0\" height=\"30.0\"/>\r\n      </bpmndi:BPMNShape>\r\n      <bpmndi:BPMNShape id=\"shape-fcbe7eef-c583-4553-8006-1573d7fa2c4c\" bpmnElement=\"sid-9cc1be4b-0391-466e-ae41-991378d9171c\">\r\n        <omgdc:Bounds x=\"-1467.6399\" y=\"-735.14\" width=\"74.80005\" height=\"56.23999\"/>\r\n      </bpmndi:BPMNShape>\r\n      <bpmndi:BPMNEdge id=\"edge-6dd21f66-9335-43a1-8936-c259b03d6952\" bpmnElement=\"sid-88729d18-2d8f-4362-95ca-af85b9eb0bea\">\r\n        <omgdi:waypoint x=\"-1443.2798\" y=\"-761.3\"/>\r\n        <omgdi:waypoint x=\"-1448.94\" y=\"-735.14\"/>\r\n      </bpmndi:BPMNEdge>\r\n      <bpmndi:BPMNShape id=\"shape-53565b28-1dcd-496d-b12c-96469262089b\" bpmnElement=\"sid-d49a2983-136d-4b9b-879d-ea5d36bebcfb\">\r\n        <omgdc:Bounds x=\"-1344.5199\" y=\"-776.89996\" width=\"82.119995\" height=\"53.23999\"/>\r\n      </bpmndi:BPMNShape>\r\n      <bpmndi:BPMNEdge id=\"edge-0e62861f-6b74-4e18-be27-78efcbae26de\" bpmnElement=\"sid-b3f4f8e7-9a41-490e-9842-518634a43b78\">\r\n        <omgdi:waypoint x=\"-1392.8398\" y=\"-721.08\"/>\r\n        <omgdi:waypoint x=\"-1344.5199\" y=\"-736.97\"/>\r\n      </bpmndi:BPMNEdge>\r\n      <bpmndi:BPMNShape id=\"shape-b3c9e06e-c01c-4aab-86cb-3acdb64bcc6c\" bpmnElement=\"sid-141652eb-ad22-4872-b5ca-cb8a191cdbd1\">\r\n        <omgdc:Bounds x=\"-1332.2799\" y=\"-702.01996\" width=\"86.19995\" height=\"68.60004\"/>\r\n      </bpmndi:BPMNShape>\r\n      <bpmndi:BPMNEdge id=\"edge-36c7ecc8-f653-48cf-8227-de80c2cd4bb8\" bpmnElement=\"sid-b3349de3-0981-49a5-a743-ffb3f8366921\">\r\n        <omgdi:waypoint x=\"-1303.46\" y=\"-723.66\"/>\r\n        <omgdi:waypoint x=\"-1310.73\" y=\"-702.01996\"/>\r\n      </bpmndi:BPMNEdge>\r\n      <bpmndi:BPMNShape id=\"shape-0d29c0ec-91fb-44e9-9b1d-5d75db2435fd\" bpmnElement=\"sid-c67b42f3-6b05-4c48-b6a0-d30b849ce54a\">\r\n        <omgdc:Bounds x=\"-1152.8906\" y=\"-700.655\" width=\"30.0\" height=\"30.0\"/>\r\n      </bpmndi:BPMNShape>\r\n      <bpmndi:BPMNEdge id=\"edge-0e2a300b-d3a1-4526-a516-0855e8dd22c2\" bpmnElement=\"sid-e652a175-e1e5-4540-8d86-b7d86811c2a7\">\r\n        <omgdi:waypoint x=\"-1246.08\" y=\"-684.86993\"/>\r\n        <omgdi:waypoint x=\"-1152.8906\" y=\"-685.655\"/>\r\n      </bpmndi:BPMNEdge>\r\n    </bpmndi:BPMNPlane>\r\n  </bpmndi:BPMNDiagram>\r\n</definitions>\r\n',
-        0),
-       ('a9e896d6-73b5-11ec-b72c-fa94c2855dc7', 1,
-        'D:\\OtherFiles\\IdeaRepository\\vains-cloud-template\\vains-flowable\\target\\classes\\processes\\test1.test1.png',
-        'a8c65df4-73b5-11ec-b72c-fa94c2855dc7',
-        _binary '�PNG\r\n\Z\n\0\0\0\rIHDR\0\0b\0\0\0�\0\0\0+V\�\0\0IDATx^\�pT\�}\�M�8M�Gۼ�I�i�M2i2��SOZ��SOM�q�\�jzX #��1��1��qH�c�4	�N�mj���%9 �\�`ɲ�HH\�\�X�	���ڽ��W\�H{��~��o\�\�9g\�]��t�>/�\�E��\�׬Y�ؒ%K�,X�\�\�ٳ\�\'	\�s�\�\�?�hѢ#�V���=�\��Y�YB!�nݺ\�\�\�\�o�\�&\����\�\�kuuuY���� Sy/\�R/\�\�\�\�^��\�\���!����\�\�_�x�\��\�ͳZ[[�.��w, ����\�[�1r\�\��\�>�\�M!
-        d ֬Yskmm텭[�Z\�ϟ׮5B>\'�\�yh\�ez�BFaժU̞={��^\�n�2�Y�f����[��E!D�z�\�9�\�p__��iA\��0\�>7w\�\�iz��B��X�\�+�\�y�F\�\Z�oMM\�@,�L/�B���\�\�>]/��ϙ3g�^6!�D�\�˗\'\�, ���3E\�?w\�\��d2y���i\�͛wTN9�Y\�̙3\��w ��\��\�>
-        YSSs\��<\�B�\�TWW˾\�O\�\�B!�\�\�;
-\���\\\�\
-'�W�~3�Lެ�!�D�[o���vK\�\��0*ަ�!�D��o��Hww�v��\��O����.�If̘�\�ɓ\'
-�+=E
-�WUUկ
-��8
-\�\�K
-�\�1
-�\�jll
-�\Z
-\Z
-\Z
-à
-��[ZZ
-�555]
-���_(//?
-\�\�9
-\�JO
-�\�R
-�!
-�]
-\�ā
-�7B&#W1
-XgϞe#
-�%
-�\�\�\�|
-\Zb
-����ϙ>}
-�\�A
-��+**^
-\�߅L
-	�L
-�d
-�\�\�W!b^pD
-�g
-֬Y
-��\�G
-\\YYy@
-2qdw
-G
-E
-�\"\�}K�\�̜9�\�\�&�z꩓�D\�	�]\�đ}�Z,\��#����ω\�\�sV�ZuF\�\�K�/_��,W2qLE�Ʃ�ս�\��䲑\�k)\�\��\Z���\\\�v\�7�\�\�+\�***N�\�:w1�׎Zm;[�Խ#R&u�}C�����ڿgϞ!-M/صkWO\"�xJR&\">ܾ\�!a;G\�7;\�G11	��������}͏��a�}D���)w\�Z\���\�\����JeeeC}}�kZ�n�aÆ�\ro\�\�&�c\"ⶆ�ۑ:\�>���I�ȓ3***^\�\�\�\�u��v%�\�\�|B�7P\�\�\"&�SVV��\�\�\�s�R�t:}<�J�\���2�;��XΒ\��#u�}C�� �H\��\��D{{�+�)�}�\�vH��\�W/�����;w?\���\�\����\r2r�<O<�\�/L�\0>wv\�ڵ�H&�	�������\�v.qHXʤN��b(bRT\�\��\�`�M\�rhjj\�4=\�\�\�n۶mwyy�!��\�Gϛ����%��^\���\�vQ\rEL�9\�Bm�\��\�������O�8�\n�;�\�\�\��\��-[~YWWׂ��Ҟ�������\�=9D,eR\�h�PĤ��+\� \�\�\�n\�tr��\��(?�\�\�s�0��\�ʹ�v\��\�\�u1)q \��T\�t9�QE��n��\�zn�B�|u�����\�\"&%\rD�.�Lޤˉ?\��X�\�\�\�\�1ELJ\Z����x����C>���G�|V\�/\n��II_��\�r\��D�\�:\�\��E!1)i�M����\�ҥKK\�\�\�\'bf���I\�w\�\��\�\�r\�=�;��I\�?��t9��؝PĤ\��h�\��\�r\�=�;��IɓJ��\"n\�\�\�{(bwB������cq�.\'\�C������(FƟ\�\�\�[(bwB�P\0oN&�_\�\�\�[(bwB�P\0/�\�r\�-~��\��\�ELB$|���u9��E|�2�\�ELB$�\'ȑd2��x<>\�x�Cݎ�E\�N(bR��|e�0����_�D\�^\�#A\�c�3\�](bwB��$;\�}K�����؝PĤ$���@\�\ry\�kg�O\���؝PĤd�h?\n\�\�#a+�\�\��P\�\�\"&%MYY\�\�B�CZ\�	\�{\��q��U\�e(bR�`���<\"��nG\�\�O�91	\�\�9�\�b�\�6\�}(bwB�PP^^�A����\�t=1�ޅ_ע?�R�~�\�5�;��IhH&�_Ld��v��ۛ�\�y&��\�\�D\�a�\�#_����=�؝P\�$T@wA\�\�rb�\�6Gģ�:(bwBױ,\�\�\�\�\�\�Z[[�\ZGV2&�\�pKK˱���\�u�\�\�!\�sZ�*�\��7i�0\���� �  ፐ�\�\�\�g\r8V�(G�C�����46���\���؞G��H�?\�v�;���\�\�HXd�W6\�\��\�\�W��\�\�}W@Ar\�Bɕ�O\�d�ݖ\"v\'1q\����\�#���oP�]P\�\� \�Md\�/++{\���7ȥ幟��\�	EL\\��Y�\��b�\��!\�J\�\r���\�\�\�A�r\n�\�\��#��Q��ɓ\'�[σ�\�\�$\�u��Ӎ�Si�{�Z��\�e#�\�R�ۅ5Al|���\��H���dOeo\Z�|ߧۢ|ZV\�[G�@\�����x�XH\�1\�8ϼv\�j۱\�:��\��2�\�\�\�7�I�\��\�Ø�@Z \�Y�\�膹�|\�\�\�\�տ�\�lL����\�\�@��\�\�y�}�C\�v��ov�c�\��\�\�8H��H�܍\�\�!\�?\�\�\n�\���;^�$��l��V8lG\�t�0Ƌ�OD\�~;+\��h\�\�\�/\�vn!\�E��laA�k(��$$����a�C�v�N�c\�qUUՇ!\�ٲ\�!�\�\�!�\�.\�9\�\�+\�\���XXz{{i(\�SI	C��_w\�u���n\"{�\�\��S��V\�\�^\"W\�\�)r^4G\�\��+\�\�ӳ\��\�\rE|q)QLD,gIhۑ:\�>���\�2�\Z�w}�t�mx_!��\�~\"�rV�M��;v8\�����%L\�GV2-�\�\�8lG\�t�0F�I�]> \�ˑ\�\�q��\�\��1C~5�OO�2彺��\�`\"\������K�2�\�\�Ø��#\�\�Bː_#ȢT*�iݎL�\��A��.\'$4��Xr\�\��K�n\�hC��g�$��=�\��Pހ�]�\�\�rBB����\�=9D,eR\�h\�H?\�b�A3�\�D\�&\�?\�h�*}O\�.\�\�y\�\�t9!�a,˕s/\��\�!a;R��\�o\�.�Ǩ��op��@\�W�\�w\�rBBè\"\�H7\�\�d=�}�C�:\�Fچyt,�D�����_\�/Z�x�Q�h	�\�X\�#&��q~���.\'$\��\�(x�\�g��\��8X��\�u9!� ���\\\�=�0�\"Hx�]]NH(\�\'b\��8X \��x|�.\'$P\�f���\"�\�\'7M\�^:>_N\�\�)I(b�P\��#W\'B�7@�˳7L��\�y.\�~�?CHIB��\"��\�U��\'S�\�\�\�R�P\�f���E\��h�\�\�[q�	&�El�\��7\�\�\��$�\�vݞ���\"6Er[Q��l_�%�d��\�Bd|K_�\�R�P\�f����ݘ#\�\����� E�\�\�i�������������\"b�������E|���\��E<	\"B�\�:BJ\Z�\�,qq�\��]q�.\'����\�E[�uiww�c���C���#}�L,\�ᖖ�cMMM\�\�~&\�C,�\�\�Wr\�Cg�M\�t��K��ӟ-YI�t�\�%y��[6V���~zgυHx#\�a���Y�>a\�#�\'�\�\�\�|\Z\�\�T\�\�$8 \�wA�5rn�}@\�$\��5�y=\�qC�%�\"���\�C�3�\�\�W�.\�\�}M�\"�:^\�d?_\�W�\�,Q�\�\�H\�\�Hb]\Z\�}M�E.��@���Z]]m�\\�Ғ_�]]]V�%\�T\�K�\�K;�Y�߄\����Ŵ\�\�DQ\�A�aNץb\"��?�oɕhMM�U__o\r\r\r��w,����\�\�\�G\�+�\�\�nlf�\�\�c�n�q*mu\�_k�?�l$�Z\�t;&�(�K\�B�fR?ϕ\��\�k�9sF�\���|^��>\�\��Dq\�1Y7\�a�m;;�%ea}�l��\�T,\�\��kk\�ƍ\����븐\�\�|d~9���^�E1\�ؘhn<&\�\�\��M	\�9Ҿ\�ў�\�T@�SsG�\"O7������<����\�\�c�nt\�Z\���\�\�h�KA#��\�!�\n	kd~��)dyƧ��llL47�u��a�C�v�N�g��.\r\�XcR�Mt��X\�|\��\Z�]�b��1\�\�xL\�\r�x��\�4��\�M�6i��\�?wT��K^L66&��ɺ!gIhۑ:ݞ�\�$�T\�\�l1\����\�%2�\��e��;90\�ؘhn<&\�F\�\��#u�=\�u)H \���\�\�>\�MO�\�\�잘�������\�\�c�n�=h�\�\\␰�I�n\�Ds]\n��ޖ�\\\���\�\�\�\��dcc�����^\���\�vL&Q\\��\"���\�>�\�l \�������3=A��#\���;90\�آ�(n<F\�\�\�չ\�!���L\�\�H�K^\�Ufe\'،\�!\���6Gm)�<yR;\�d99\">��}�b��1�\�x\�Z7\�ʹ�v\��\�\�u\�Dq]�d2ye��F��\�1]�\�Uh2	�\��s\�\�igz�,\'\�;�}���66&�(n<��\�;��\�/t\�WG\�H[��\�N\�%��\��O��U\�\�g\���x���\�[7\�\Z���\�N\�%����}Dw>��s3l�\�>\�O7�|\�\�(x�\�g����(�K�\"�\n������\�$���x<��D\�Nj�X\�\�\�/�����=kB��ś_<\�c\r��w>k��7z~QE\�D\�\�|���y}�/���=\�\�D\�\�\�\�]\��\�\�0}6Gzv�@\�\�ʼ�p�<А�ùxz{{i�\�\�m�)<񤊊�?�/�8˲b��G\��aڏ��t ;�\"�PW%\�d?�\�\�3�A��\�HO�#|\�Cv}I\\Y\'O��\Zʳ�82~g\�鞞�\r\�p^n�\�)bo6\�\�b\�_@�W#7A>ːu\�.�+�9k!��\n\��ރ\�7\��\�x�媪�\�y�\�cEVz=�t��,�{M\"�!ge%aފ��K\�$,Hh�0�G�U�u3	2�8d�ט�3�\�\�t%$��4r�\r�\�0�1��\��� \�˦L��^=S7�rn��\�ӦM����I�\�\�\r�؛��E�\"K\�k�\�t�(\��L��\"\�+��t�@��0�U��\�W*++?�\�\�7�\'O~�.\����	\r�؛�)b\�\�#��b�\�[���x�هOdv�\Z\�M��\��.Lk0�Zv7\�\�J�D1?���Ѡ���[\"�$/M�R�\�?Yla�\��HdxɁ/9\0֟= ����\�t>�1L�F�a6��|\�L�X�YG\�hP\�\�\�TĐ\�\�C�_=\rӹY�<��&2�r\r\"���S�\�T�\�\�bz\r\�����w�<�N\�>ř�Ѡ�����\�ׄh?���\n��Ӆ�\�Øn\�\�˔\�rO!�\�r0\n\�0\�\�\�W\�\�n\�C\�YF?nɕ�`��������k�\"���:0g\�|e�z��L�؛\�ܹS6Z9\�\�\�D\�ʯ��d\�\�F<r�\'L�\0\�~P���?b��)\�\���+W��2���\�\�\�\��L彔K}\�y\�vd~�\�H\\�\"�&ү<�^@�S��@b5M��<0G��\"�&����?\�\�D\�L�q	9۾�T��P\�ބ\".^\�\�x<^�lJdN�\�h�xe�Oʥ^\�\�\�\�	�7��	!\�P\�ބ\"&�C{��bL\"\�b�Ưz?BB�	J\�+�ޏPĄc(boBB����	EL1�\"�&1!\��؛PĄc(boBB�	J\��\�W���	!\�!\�(�\"&�C{��bE\�M(bB�1�7��	!\�P\�ބ\"&�C{��bE\�M(bB�1�7��	!\�P\�ބ\"&�C{��bE\�M(bB�1�7��	!\�P\�ބ\"&�C{��bE\�M(bB�1�7��	!\�P\�ބ\"&�C{��bE\�M(bB�1�7��	!\�P\�ބ\"&�\�\�\�8<00\�	3�?�Aă��	!$/---\����2a&�\�\�\�G \�}��	!$/MMM\�777�N�ӯrd\\X\�鞞�\r��\�\�T\�ׄ2*\"\r�!ge\�&3\�H�I?RB!�B!�B!�B!�B!�B!�\����\�\�\�\�\0\0\0\0IEND�B`�',1);
-/*!40000 ALTER TABLE `act_ge_bytearray` ENABLE KEYS */;
-UNLOCK TABLES;
-
 --
 -- Table structure for table `act_ge_property`
 --
@@ -5733,379 +5674,3 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2022-05-26  1:30:35
-
-
--- Nacos表已存在，无需创建，直接重置表结构与数据
-
-USE `nacos_db`;
-
-/*Table structure for table `config_info` */
-
-DROP TABLE IF EXISTS `config_info`;
-
-CREATE TABLE `config_info` (
-`id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
-`data_id` varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'data_id',
-`group_id` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-`content` longtext COLLATE utf8_bin NOT NULL COMMENT 'content',
-`md5` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT 'md5',
-`gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-`gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
-`src_user` text COLLATE utf8_bin COMMENT 'source user',
-`src_ip` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT 'source ip',
-`app_name` varchar(128) COLLATE utf8_bin DEFAULT NULL,
-`tenant_id` varchar(128) COLLATE utf8_bin DEFAULT '' COMMENT '租户字段',
-`c_desc` varchar(256) COLLATE utf8_bin DEFAULT NULL,
-`c_use` varchar(64) COLLATE utf8_bin DEFAULT NULL,
-`effect` varchar(64) COLLATE utf8_bin DEFAULT NULL,
-`type` varchar(64) COLLATE utf8_bin DEFAULT NULL,
-`c_schema` text COLLATE utf8_bin,
-PRIMARY KEY (`id`),
-UNIQUE KEY `uk_configinfo_datagrouptenant` (`data_id`,`group_id`,`tenant_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='config_info';
-
-/*Data for the table `config_info` */
-
-LOCK TABLES `config_info` WRITE;
-
-insert  into `config_info`(`id`,`data_id`,`group_id`,`content`,`md5`,`gmt_create`,`gmt_modified`,`src_user`,`src_ip`,`app_name`,`tenant_id`,`c_desc`,`c_use`,`effect`,`type`,`c_schema`) values
-
-(1,'vains-authorization-server-dev.yaml','DEFAULT_GROUP','server:\n  port: 5000\nspring:\n  datasource:\n    username: ${database.username}\n    password: ${database.password}\n    driver-class-name: ${database.driver-class-name}\n    url: jdbc:mysql://${database.url}/vains-auth?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&serverTimezone=Asia/Shanghai\n  security:\n    oauth2:\n      client:\n        registration:\n          github-idp:\n            provider: github\n            client-id: ${GITHUB_CLIENT_ID:88c69e87b2e50d2dab4d}\n            client-secret: ${GITHUB_CLIENT_SECRET:819ac59f86c2b56c5ea0540e3d427df3c1129709}\n            scope: user:email, read:user\n            client-name: Sign in with GitHub\n        provider:\n          github:\n            user-name-attribute: login','13da0e9dfe52f9d8636ebb170070c340','2022-10-22 16:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','vains-cloud-template','',NULL,NULL,NULL,'yaml',NULL),
-
-(2,'vains-admin-client-dev.yaml','DEFAULT_GROUP','management:\n  endpoints:\n    web:\n      exposure:\n        #开放所有页面节点  默认只开启了health、info两个节点\n        include: \'*
-\'\n  endpoint:\n    logfile:\n      external-file: ./logs/${spring.application.name}/web_admin.log\n    health:\n      #显示健康具体信息  默认不会显示详细信息\n      show-details: always\n# 利用info端点，加入版本等信息\ninfo:\n  versin: 1.0-SNAPSHOT \n  name: ${spring.application.name}\n  group: com.vains\n  description: 项目监控服务\n  # 自定义信息\n  author: vains\n\n# 监控客户端配置\nspring:\n  boot:\n    admin:\n      client:\n        url: http://127.0.0.1:5100/admin-server\n\n# 日志文件路径\nlogging:\n  file:\n    path: ./logs/${spring.application.name}\n\n# 白名单\nvains:\n  white-list:\n    uris: /assets/**,/sba-settings.js,/actuator/**','5e4d732a77371319432d3677dac4b4ce','2022-10-22 16:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','vains-cloud-template','',NULL,NULL,NULL,'yaml',NULL),
-
-(3,'swagger-dev.yaml','DEFAULT_GROUP','# ===== 自定义swagger配置 ===== #\nswagger:\n  enable: true\n  application-name: ${spring.application.name}\n  application-version: 1.0\n  application-description: 接口文档\n  try-host: http://localhost:${server.port}','fafe9076f1b729965a46f038e6fc6c30','2022-10-22 16:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','vains-cloud-template','',NULL,NULL,NULL,'yaml',NULL),
-
-(4,'vains-gateway-prod.yaml','DEFAULT_GROUP','server:\n  port: 5100\nspring:\n  security:\n    oauth2:\n      client:\n        provider:\n          spring:\n            issuer-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}\n            user-info-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/user\n        registration:\n          admin-oidc:\n            provider: spring\n            client-id: admin\n            client-secret: 123456\n            authorization-grant-type: authorization_code\n            redirect-uri-template: ${security.client.redirect-uri-template}\n            scope: user.userInfo\n            client-name: admin-oidc\n            client_authentication_method: client_secret_basic\n          gateway-oidc:\n            provider: spring\n            client-id: gateway\n            client-secret: 123456\n            authorization-grant-type: authorization_code\n            redirect-uri: ${security.client.redirect-uri}\n            # redirect-uri-template: \"{baseUrl}/login/oauth2/code/{registrationId}\"\n            # redirect-uri: \"http://127.0.0.1:8001/code/redirect\"\n            scope: all\n            client-name: gateway-oidc\n            client_authentication_method: client_secret_basic\n          messaging-client-client-credentials:\n            provider: spring\n            client-id: admin\n            client-secret: 123456\n            authorization-grant-type: client_credentials\n            scope: user.photos,user.userInfo\n            client-name: messaging-client-client-credentials\n            client_authentication_method: client_secret_basic\n  cloud:\n    gateway:\n      globalcors:        \n        cors-configurations:\n          \'[/**]\': \n            allowedOrigins: \n            - \"http://localhost:3000\"\n            - \"http://127.0.0.1:3000\"\n            - \"http://vains-sofia.gitee.io\"\n            allowedHeaders: \"*\"\n            allowedMethods:\n            - GET\n            - POST\n            - DELETE\n            - PUT\n        add-to-simple-url-handler-mapping: true\n      routes:\n      - id: monitor\n        uri: lb://vains-monitor\n        predicates:\n        - Path=/monitor/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n      - id: oauth2\n        uri: lb://vains-authorization-server\n        predicates:\n        - Path=/oauth2/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n        - PreserveHostHeader\n      - id: search\n        uri: lb://vains-search\n        predicates:\n        - Path=/search/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n      - id: flowable\n        uri: lb://vains-flowable\n        predicates:\n        - Path=/flowable/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n      - id: system\n        uri: lb://vains-system\n        predicates:\n        - Path=/system/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=','b2bc468d04aefbea618ececfb93f8ea9','2022-10-22 16:40:23','2022-10-27 14:19:41','nacos','59.41.210.54','vains-cloud-template','','','','','yaml',''),
-
-(5,'vains-authorization-server-prod.yaml','DEFAULT_GROUP','server:\n  port: 5000\nspring:\n  datasource:\n    username: ${database.username}\n    password: ${database.password}\n    driver-class-name: ${database.driver-class-name}\n    url: jdbc:mysql://${database.url}/vains-auth?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&serverTimezone=Asia/Shanghai\n  security:\n    oauth2:\n      client:\n        registration:\n          github-idp:\n            provider: github\n            client-id: ${GITHUB_CLIENT_ID:88c69e87b2e50d2dab4d}\n            client-secret: ${GITHUB_CLIENT_SECRET:819ac59f86c2b56c5ea0540e3d427df3c1129709}\n            scope: user:email, read:user\n            client-name: Sign in with GitHub\n        provider:\n          github:\n            user-name-attribute: login','13da0e9dfe52f9d8636ebb170070c340','2022-10-22 16:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','vains-cloud-template','',NULL,NULL,NULL,'yaml',NULL),
-
-(6,'vains-admin-client-prod.yaml','DEFAULT_GROUP','management:\n  endpoints:\n    web:\n      exposure:\n        #开放所有页面节点  默认只开启了health、info两个节点\n        include: \'*\'\n  # endpoint:\n  #   logfile:\n  #     external-file: ./logs/${spring.application.name}/web_admin.log\n    health:\n      #显示健康具体信息  默认不会显示详细信息\n      show-details: always\n# 利用info端点，加入版本等信息\ninfo:\n  versin: 1.0-SNAPSHOT \n  name: ${spring.application.name}\n  group: com.vains\n  description: 项目监控服务\n  # 自定义信息\n  author: vains\n\n# 监控客户端配置\nspring:\n  boot:\n    admin:\n      client:\n        # url: http://127.0.0.1:5100/admin-server\n        url: http://k7fsqkhtbx.cdhttp.cn/monitor\n\n# 日志文件路径\nlogging:\n  file:\n    path: ./logs/${spring.application.name}\n\n# 白名单\nvains:\n  white-list:\n    uris: /assets/**,/sba-settings.js,/actuator/**,/user/getByUsername/**','dd8f25e9a9ac598779082af0fe6a4f61','2022-10-22 16:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','vains-cloud-template','',NULL,NULL,NULL,'yaml',NULL),
-
-(7,'swagger-prod.yaml','DEFAULT_GROUP','# ===== 自定义swagger配置 ===== #\nswagger:\n  enable: true\n  application-name: ${spring.application.name}\n  application-version: 1.0\n  application-description: 接口文档\n  try-host: http://localhost:${server.port}\nspring:\n  mvc:\n    pathmatch:\n      matching-strategy: ant_path_matcher','48cc9bbcab5f8ff70831079d56cd9ef2','2022-10-22 16:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','vains-cloud-template','',NULL,NULL,NULL,'yaml',NULL),
-
-(8,'vains-search-prod.yaml','DEFAULT_GROUP','server:\n  port: 5300\nspring:\n  security:\n    oauth2:\n      resourceserver:\n        jwt:\n          # issuer-uri: http://localhost:5000\n          issuer-uri: http://kwqqr48rgo.cdhttp.cn\n          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/oauth2/jwks\n  boot:\n    admin:\n      ui:\n        # public-url: http://127.0.0.1:5100/admin-server\n        public-url: http://k7fsqkhtbx.cdhttp.cn:80/admin-server','075ce1d90d3574daf55ff4d70f4f219f','2022-10-22 16:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','vains-cloud-template','',NULL,NULL,NULL,'yaml',NULL),
-
-(9,'vains-monitor-prod.yaml','DEFAULT_GROUP','server:\n  port: 5200\nspring:\n  boot:\n    admin:\n      ui:\n        # public-url: http://127.0.0.1:5100/admin-server\n        # public-url: http://k7fsqkhtbx.cdhttp.cn:80/monitor\n        public-url: ${boot.admin.ui}','67917fbeeb2288e173525c6580146262','2022-10-22 16:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','vains-cloud-template','',NULL,NULL,NULL,'yaml',NULL),
-
-(10,'vains-monitor-dev.yaml','DEFAULT_GROUP','server:\n  port: 5200\nspring:\n  security:\n    oauth2:\n      resourceserver:\n        jwt:\n          issuer-uri: http://localhost:5000\n          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/oauth2/jwks\n  boot:\n    admin:\n      ui:\n        public-url: http://127.0.0.1:5100/admin-server','d42313435b1474ebe6a760c0d5d755f4','2022-10-22 16:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','vains-cloud-template','',NULL,NULL,NULL,'yaml',NULL),
-
-(11,'vains-flowable-prod.yaml','DEFAULT_GROUP','server:\n  port: 5400\nspring:\n  security:\n    oauth2:\n      resourceserver:\n        jwt:\n          # issuer-uri: http://localhost:5000\n          issuer-uri: http://kwqqr48rgo.cdhttp.cn\n          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/oauth2/jwks\n  datasource:\n    username: root\n    password: root\n    driver-class-name: com.mysql.cj.jdbc.Driver\n    url: jdbc:mysql://localhost:3306/vains-flowable?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&serverTimezone=Asia/Shanghai','59c3ee2f01b0c66b32513a77cfcf6471','2022-10-22 16:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','vains-cloud-template','',NULL,NULL,NULL,'yaml',NULL),
-
-(12,'vains-system-prod.yaml','DEFAULT_GROUP','server:\n  port: 5500\nspring:\n  datasource:\n    username: ${database.username}\n    password: ${database.password}\n    driver-class-name: ${database.driver-class-name}\n    url: jdbc:mysql://${database.url}/vains-system?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&serverTimezone=Asia/Shanghai\nmybatis-plus:\n  typeEnumsPackage: com.vains.enums\n  mapper-locations:\n    - classpath:com/vains/mapper/xml/*Mapper.xml\n  global-config:\n    db-config:\n      logic-delete-field: deleted\n      logic-delete-value: 1\n      logic-not-delete-value: 0','4c5a6ae41a84bab3662a3bc3e34c7271','2022-10-22 16:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','vains-cloud-template','',NULL,NULL,NULL,'yaml',NULL),
-
-(13,'vains-common-prod.yaml','DEFAULT_GROUP','# 数据库链接配置\ndatabase:\n  url: f76545e24227.c.methodot.com:34803\n  username: root\n  password: 123456\n  driver-class-name: com.mysql.cj.jdbc.Driver \n# Security 回调地址设置\nsecurity:\n  client:\n    redirect-uri: http://k7fsqkhtbx.cdhttp.cn/code/redirect\n    redirect-uri-template: http://k7fsqkhtbx.cdhttp.cn/login/oauth2/code/{registrationId}\n# Security 请求白名单\nvains:\n  white-list:\n    uris: /assets/**,/sba-settings.js,/actuator/**,/swagger-ui/**,/swagger-resources/**,/*/v3/api-docs,/v3/api-docs,/webjars/**,/*/oauth2/token,/nacos/**\n# 设置项目监控地址\nboot:\n  admin:\n    ui: http://k7fsqkhtbx.cdhttp.cn:80/monitor\nspring:\n  # Security Resource Server 配置\n  security:\n    oauth2:\n      resourceserver:\n        jwt:\n          # issuer-uri: http://localhost:5000\n          # issuer-uri: http://kwqqr48rgo.cdhttp.cn\n          issuer-uri: http://kwqqr48rgo.cdhttp.cn\n          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/oauth2/jwks\n  # Spring boot Admin 监控客户端配置\n  boot:\n    admin:\n      client:\n        # url: http://127.0.0.1:5100/admin-server\n        # url: http://k7fsqkhtbx.cdhttp.cn/monitor\n        url: http://k7fsqkhtbx.cdhttp.cn/monitor\n  # Spring boot 2.6版本以后pathmatch策略变化，导致swagger报错，改回原先的策略\n  mvc:\n    pathmatch:\n      matching-strategy: ant_path_matcher\n# Spring boot 监控配置\nmanagement:\n  endpoints:\n    web:\n      exposure:\n        #开放所有页面节点  默认只开启了health、info两个节点\n        include: \'*\'\n    # endpoint:\n    #   logfile:\n    #     external-file: ./logs/${spring.application.name}/web_admin.log\n    health:\n      #显示健康具体信息  默认不会显示详细信息\n      show-details: always\n# 利用info端点，加入版本等信息\ninfo:\n  versin: 1.0\n  name: ${spring.application.name}\n  group: com.vains\n  description: 项目监控服务\n  # 自定义信息\n  author: vains\n# 日志文件路径\nlogging:\n  file:\n    path: ./logs/${spring.application.name}\n# ===== 自定义swagger配置 ===== #\nswagger:\n  enable: true\n  application-name: ${spring.application.name}\n  application-version: 1.0\n  application-description: 接口文档\n  try-host: http://localhost:${server.port}\n  oauth2: \n    # oauth2认证\n    authorize-uri: http://kwqqr48rgo.cdhttp.cn/oauth2/authorize\n    access-token-uri: http://kwqqr48rgo.cdhttp.cn/oauth2/token\n','258ffbad79c1de16fc588eb3cc0aed32','2022-10-22 16:40:23','2022-10-22 16:42:53','nacos','58.248.159.14','vains-cloud-template','','','','','yaml',''),
-
-(14,'vains-common-dev.yaml','DEFAULT_GROUP','# 数据库链接配置\ndatabase:\n  url: 127.0.0.1:3306\n  username: root\n  password: root\n  driver-class-name: com.mysql.cj.jdbc.Driver\nsecurity:\n  client:\n    redirect-uri: http://127.0.0.1:5100/code/redirect\n    redirect-uri-template: http://127.0.0.1:5100/login/oauth2/code/{registrationId}\n# Security请求白名单\nvains:\n  white-list:\n    uris: /assets/**,/sba-settings.js,/actuator/**,/swagger-ui/**,/swagger-resources/**,/*/v3/api-docs,/v3/api-docs,/webjars/**,/*/oauth2/token\n# 设置项目监控地址\nboot:\n  admin:\n    ui: http://localhost:5100/monitor\nspring:\n  # Security Resource Server 配置\n  security:\n    oauth2:\n      resourceserver:\n        jwt:\n          # issuer-uri: http://localhost:5000\n          # issuer-uri: http://kwqqr48rgo.cdhttp.cn\n          issuer-uri: http://127.0.0.1:5000\n          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/oauth2/jwks\n  # Spring boot Admin 监控客户端配置\n  boot:\n    admin:\n      client:\n        # url: http://127.0.0.1:5100/admin-server\n        # url: http://k7fsqkhtbx.cdhttp.cn/monitor\n        url: http://localhost:5100/monitor\n  # Spring boot 2.6版本以后pathmatch策略变化，导致swagger报错，改回原先的策略\n  mvc:\n    pathmatch:\n      matching-strategy: ant_path_matcher\n# Spring boot 监控配置\nmanagement:\n  endpoints:\n    web:\n      exposure:\n        #开放所有页面节点  默认只开启了health、info两个节点\n        include: \'*\'\n    # endpoint:\n    #   logfile:\n    #     external-file: ./logs/${spring.application.name}/web_admin.log\n    health:\n      #显示健康具体信息  默认不会显示详细信息\n      show-details: always\n# 利用info端点，加入版本等信息\ninfo:\n  versin: 1.0\n  name: ${spring.application.name}\n  group: com.vains\n  description: 项目监控服务\n  # 自定义信息\n  author: vains\n# 日志文件路径\nlogging:\n  file:\n    path: ./logs/${spring.application.name}\n# ===== 自定义swagger配置 ===== #\nswagger:\n  enable: true\n  application-name: ${spring.application.name}\n  application-version: 1.0\n  application-description: 接口文档\n  try-host: http://localhost:${server.port}\n  oauth2: \n    authorize-uri: http://127.0.0.1:5000/oauth2/authorize\n    access-token-uri: http://127.0.0.1:5000/oauth2/token\n','cc66038f6979cd0e82b4a218c750be57','2022-10-22 16:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','vains-cloud-template','',NULL,NULL,NULL,'yaml',NULL),
-
-(15,'vains-gateway-dev.yaml','DEFAULT_GROUP','server:\n  port: 5100\nspring:\n  security:\n    oauth2:\n      client:\n        provider:\n          spring:\n            issuer-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}\n            user-info-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/user\n        registration:\n          admin-oidc:\n            provider: spring\n            client-id: admin\n            client-secret: 123456\n            authorization-grant-type: authorization_code\n            redirect-uri-template: ${security.client.redirect-uri-template}\n            scope: user.userInfo\n            client-name: admin-oidc\n            client_authentication_method: client_secret_basic\n          gateway-oidc:\n            provider: spring\n            client-id: gateway\n            client-secret: 123456\n            authorization-grant-type: authorization_code\n            redirect-uri: ${security.client.redirect-uri}\n            # redirect-uri-template: \"{baseUrl}/login/oauth2/code/{registrationId}\"\n            # redirect-uri: \"http://127.0.0.1:8001/code/redirect\"\n            scope: all\n            client-name: gateway-oidc\n            client_authentication_method: client_secret_basic\n          messaging-client-client-credentials:\n            provider: spring\n            client-id: admin\n            client-secret: 123456\n            authorization-grant-type: client_credentials\n            scope: user.photos,user.userInfo\n            client-name: messaging-client-client-credentials\n            client_authentication_method: client_secret_basic\n  cloud:\n    gateway:\n      globalcors:        \n        cors-configurations:\n          \'[/**]\': \n            allowedOrigins: \"http://localhost:3000\"\n            allowedHeaders: \"*\"\n            allowedMethods:\n            - GET\n            - POST\n            - DELETE\n            - PUT\n        add-to-simple-url-handler-mapping: true\n      routes:\n      - id: monitor\n        uri: lb://vains-monitor\n        predicates:\n        - Path=/monitor/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n      - id: oauth2\n        uri: lb://vains-authorization-server\n        predicates:\n        - Path=/oauth2/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n        - PreserveHostHeader\n      - id: search\n        uri: lb://vains-search\n        predicates:\n        - Path=/search/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n      - id: flowable\n        uri: lb://vains-flowable\n        predicates:\n        - Path=/flowable/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n      - id: system\n        uri: lb://vains-system\n        predicates:\n        - Path=/system/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=','85ebd4a0405ce69a203bcdd1160f5c4e','2022-10-22 16:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','vains-cloud-template','',NULL,NULL,NULL,'yaml',NULL),
-
-(16,'vains-system-dev.yaml','DEFAULT_GROUP','server:\n  port: 5500\nspring:\n  datasource:\n    username: ${database.username}\n    password: ${database.password}\n    driver-class-name: ${database.driver-class-name}\n    url: jdbc:mysql://${database.url}/vains-system?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&serverTimezone=Asia/Shanghai\nmybatis-plus:\n  typeEnumsPackage: com.vains.enums\n  mapper-locations:\n    - classpath:com/vains/mapper/xml/*Mapper.xml\n  global-config:\n    db-config:\n      logic-delete-field: deleted\n      logic-delete-value: 1\n      logic-not-delete-value: 0','4c5a6ae41a84bab3662a3bc3e34c7271','2022-10-22 16:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','vains-cloud-template','',NULL,NULL,NULL,'yaml',NULL);
-
-UNLOCK TABLES;
-
-/*Table structure for table `config_info_aggr` */
-
-DROP TABLE IF EXISTS `config_info_aggr`;
-
-CREATE TABLE `config_info_aggr` (
-`id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
-`data_id` varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'data_id',
-`group_id` varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'group_id',
-`datum_id` varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'datum_id',
-`content` longtext COLLATE utf8_bin NOT NULL COMMENT '内容',
-`gmt_modified` datetime NOT NULL COMMENT '修改时间',
-`app_name` varchar(128) COLLATE utf8_bin DEFAULT NULL,
-`tenant_id` varchar(128) COLLATE utf8_bin DEFAULT '' COMMENT '租户字段',
-PRIMARY KEY (`id`),
-UNIQUE KEY `uk_configinfoaggr_datagrouptenantdatum` (`data_id`,`group_id`,`tenant_id`,`datum_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='增加租户字段';
-
-/*Data for the table `config_info_aggr` */
-
-LOCK TABLES `config_info_aggr` WRITE;
-
-UNLOCK TABLES;
-
-/*Table structure for table `config_info_beta` */
-
-DROP TABLE IF EXISTS `config_info_beta`;
-
-CREATE TABLE `config_info_beta` (
-`id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
-`data_id` varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'data_id',
-`group_id` varchar(128) COLLATE utf8_bin NOT NULL COMMENT 'group_id',
-`app_name` varchar(128) COLLATE utf8_bin DEFAULT NULL COMMENT 'app_name',
-`content` longtext COLLATE utf8_bin NOT NULL COMMENT 'content',
-`beta_ips` varchar(1024) COLLATE utf8_bin DEFAULT NULL COMMENT 'betaIps',
-`md5` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT 'md5',
-`gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-`gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
-`src_user` text COLLATE utf8_bin COMMENT 'source user',
-`src_ip` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT 'source ip',
-`tenant_id` varchar(128) COLLATE utf8_bin DEFAULT '' COMMENT '租户字段',
-PRIMARY KEY (`id`),
-UNIQUE KEY `uk_configinfobeta_datagrouptenant` (`data_id`,`group_id`,`tenant_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='config_info_beta';
-
-/*Data for the table `config_info_beta` */
-
-LOCK TABLES `config_info_beta` WRITE;
-
-UNLOCK TABLES;
-
-/*Table structure for table `config_info_tag` */
-
-DROP TABLE IF EXISTS `config_info_tag`;
-
-CREATE TABLE `config_info_tag` (
-`id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
-`data_id` varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'data_id',
-`group_id` varchar(128) COLLATE utf8_bin NOT NULL COMMENT 'group_id',
-`tenant_id` varchar(128) COLLATE utf8_bin DEFAULT '' COMMENT 'tenant_id',
-`tag_id` varchar(128) COLLATE utf8_bin NOT NULL COMMENT 'tag_id',
-`app_name` varchar(128) COLLATE utf8_bin DEFAULT NULL COMMENT 'app_name',
-`content` longtext COLLATE utf8_bin NOT NULL COMMENT 'content',
-`md5` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT 'md5',
-`gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-`gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
-`src_user` text COLLATE utf8_bin COMMENT 'source user',
-`src_ip` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT 'source ip',
-PRIMARY KEY (`id`),
-UNIQUE KEY `uk_configinfotag_datagrouptenanttag` (`data_id`,`group_id`,`tenant_id`,`tag_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='config_info_tag';
-
-/*Data for the table `config_info_tag` */
-
-LOCK TABLES `config_info_tag` WRITE;
-
-UNLOCK TABLES;
-
-/*Table structure for table `config_tags_relation` */
-
-DROP TABLE IF EXISTS `config_tags_relation`;
-
-CREATE TABLE `config_tags_relation` (
-`id` bigint(20) NOT NULL COMMENT 'id',
-`tag_name` varchar(128) COLLATE utf8_bin NOT NULL COMMENT 'tag_name',
-`tag_type` varchar(64) COLLATE utf8_bin DEFAULT NULL COMMENT 'tag_type',
-`data_id` varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'data_id',
-`group_id` varchar(128) COLLATE utf8_bin NOT NULL COMMENT 'group_id',
-`tenant_id` varchar(128) COLLATE utf8_bin DEFAULT '' COMMENT 'tenant_id',
-`nid` bigint(20) NOT NULL AUTO_INCREMENT,
-PRIMARY KEY (`nid`),
-UNIQUE KEY `uk_configtagrelation_configidtag` (`id`,`tag_name`,`tag_type`),
-KEY `idx_tenant_id` (`tenant_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='config_tag_relation';
-
-/*Data for the table `config_tags_relation` */
-
-LOCK TABLES `config_tags_relation` WRITE;
-
-UNLOCK TABLES;
-
-/*Table structure for table `group_capacity` */
-
-DROP TABLE IF EXISTS `group_capacity`;
-
-CREATE TABLE `group_capacity` (
-`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-`group_id` varchar(128) COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT 'Group ID，空字符表示整个集群',
-`quota` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '配额，0表示使用默认值',
-`usage` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '使用量',
-`max_size` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '单个配置大小上限，单位为字节，0表示使用默认值',
-`max_aggr_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '聚合子配置最大个数，，0表示使用默认值',
-`max_aggr_size` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '单个聚合数据的子配置大小上限，单位为字节，0表示使用默认值',
-`max_history_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最大变更历史数量',
-`gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-`gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
-PRIMARY KEY (`id`),
-UNIQUE KEY `uk_group_id` (`group_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='集群、各Group容量信息表';
-
-/*Data for the table `group_capacity` */
-
-LOCK TABLES `group_capacity` WRITE;
-
-UNLOCK TABLES;
-
-/*Table structure for table `his_config_info` */
-
-DROP TABLE IF EXISTS `his_config_info`;
-
-CREATE TABLE `his_config_info` (
-`id` bigint(64) unsigned NOT NULL,
-`nid` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-`data_id` varchar(255) COLLATE utf8_bin NOT NULL,
-`group_id` varchar(128) COLLATE utf8_bin NOT NULL,
-`app_name` varchar(128) COLLATE utf8_bin DEFAULT NULL COMMENT 'app_name',
-`content` longtext COLLATE utf8_bin NOT NULL,
-`md5` varchar(32) COLLATE utf8_bin DEFAULT NULL,
-`gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-`gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-`src_user` text COLLATE utf8_bin,
-`src_ip` varchar(20) COLLATE utf8_bin DEFAULT NULL,
-`op_type` char(10) COLLATE utf8_bin DEFAULT NULL,
-`tenant_id` varchar(128) COLLATE utf8_bin DEFAULT '' COMMENT '租户字段',
-PRIMARY KEY (`nid`),
-KEY `idx_gmt_create` (`gmt_create`),
-KEY `idx_gmt_modified` (`gmt_modified`),
-KEY `idx_did` (`data_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='多租户改造';
-
-/*Data for the table `his_config_info` */
-
-LOCK TABLES `his_config_info` WRITE;
-
-insert  into `his_config_info`(`id`,`nid`,`data_id`,`group_id`,`app_name`,`content`,`md5`,`gmt_create`,`gmt_modified`,`src_user`,`src_ip`,`op_type`,`tenant_id`) values
-
-(0,1,'vains-authorization-server-dev.yaml','DEFAULT_GROUP','vains-cloud-template','server:\n  port: 5000\nspring:\n  datasource:\n    username: ${database.username}\n    password: ${database.password}\n    driver-class-name: ${database.driver-class-name}\n    url: jdbc:mysql://${database.url}/vains-auth?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&serverTimezone=Asia/Shanghai\n  security:\n    oauth2:\n      client:\n        registration:\n          github-idp:\n            provider: github\n            client-id: ${GITHUB_CLIENT_ID:88c69e87b2e50d2dab4d}\n            client-secret: ${GITHUB_CLIENT_SECRET:819ac59f86c2b56c5ea0540e3d427df3c1129709}\n            scope: user:email, read:user\n            client-name: Sign in with GitHub\n        provider:\n          github:\n            user-name-attribute: login','13da0e9dfe52f9d8636ebb170070c340','2022-10-22 08:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','I',''),
-
-(0,2,'vains-admin-client-dev.yaml','DEFAULT_GROUP','vains-cloud-template','management:\n  endpoints:\n    web:\n      exposure:\n        #开放所有页面节点  默认只开启了health、info两个节点\n        include: \'*\'\n  endpoint:\n    logfile:\n      external-file: ./logs/${spring.application.name}/web_admin.log\n    health:\n      #显示健康具体信息  默认不会显示详细信息\n      show-details: always\n# 利用info端点，加入版本等信息\ninfo:\n  versin: 1.0-SNAPSHOT \n  name: ${spring.application.name}\n  group: com.vains\n  description: 项目监控服务\n  # 自定义信息\n  author: vains\n\n# 监控客户端配置\nspring:\n  boot:\n    admin:\n      client:\n        url: http://127.0.0.1:5100/admin-server\n\n# 日志文件路径\nlogging:\n  file:\n    path: ./logs/${spring.application.name}\n\n# 白名单\nvains:\n  white-list:\n    uris: /assets/**,/sba-settings.js,/actuator/**','5e4d732a77371319432d3677dac4b4ce','2022-10-22 08:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','I',''),
-
-(0,3,'swagger-dev.yaml','DEFAULT_GROUP','vains-cloud-template','# ===== 自定义swagger配置 ===== #\nswagger:\n  enable: true\n  application-name: ${spring.application.name}\n  application-version: 1.0\n  application-description: 接口文档\n  try-host: http://localhost:${server.port}','fafe9076f1b729965a46f038e6fc6c30','2022-10-22 08:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','I',''),
-
-(0,4,'vains-gateway-prod.yaml','DEFAULT_GROUP','vains-cloud-template','server:\n  port: 5100\nspring:\n  security:\n    oauth2:\n      client:\n        provider:\n          spring:\n            issuer-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}\n            user-info-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/user\n        registration:\n          admin-oidc:\n            provider: spring\n            client-id: admin\n            client-secret: 123456\n            authorization-grant-type: authorization_code\n            redirect-uri-template: ${security.client.redirect-uri-template}\n            scope: user.userInfo\n            client-name: admin-oidc\n            client_authentication_method: client_secret_basic\n          gateway-oidc:\n            provider: spring\n            client-id: gateway\n            client-secret: 123456\n            authorization-grant-type: authorization_code\n            redirect-uri: ${security.client.redirect-uri}\n            # redirect-uri-template: \"{baseUrl}/login/oauth2/code/{registrationId}\"\n            # redirect-uri: \"http://127.0.0.1:8001/code/redirect\"\n            scope: all\n            client-name: gateway-oidc\n            client_authentication_method: client_secret_basic\n          messaging-client-client-credentials:\n            provider: spring\n            client-id: admin\n            client-secret: 123456\n            authorization-grant-type: client_credentials\n            scope: user.photos,user.userInfo\n            client-name: messaging-client-client-credentials\n            client_authentication_method: client_secret_basic\n  cloud:\n    gateway:\n      globalcors:        \n        cors-configurations:\n          \'[/**]\': \n            allowedOrigins: \n            - \"http://localhost:3000\"\n            - \"http://127.0.0.1:3000\"\n            allowedHeaders: \"*\"\n            allowedMethods:\n            - GET\n            - POST\n            - DELETE\n            - PUT\n        add-to-simple-url-handler-mapping: true\n      routes:\n      - id: monitor\n        uri: lb://vains-monitor\n        predicates:\n        - Path=/monitor/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n      - id: oauth2\n        uri: lb://vains-authorization-server\n        predicates:\n        - Path=/oauth2/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n        - PreserveHostHeader\n      - id: search\n        uri: lb://vains-search\n        predicates:\n        - Path=/search/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n      - id: flowable\n        uri: lb://vains-flowable\n        predicates:\n        - Path=/flowable/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n      - id: system\n        uri: lb://vains-system\n        predicates:\n        - Path=/system/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=','d2bcb11163d7e10f7e5d36c6c7025121','2022-10-22 08:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','I',''),
-
-(0,5,'vains-authorization-server-prod.yaml','DEFAULT_GROUP','vains-cloud-template','server:\n  port: 5000\nspring:\n  datasource:\n    username: ${database.username}\n    password: ${database.password}\n    driver-class-name: ${database.driver-class-name}\n    url: jdbc:mysql://${database.url}/vains-auth?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&serverTimezone=Asia/Shanghai\n  security:\n    oauth2:\n      client:\n        registration:\n          github-idp:\n            provider: github\n            client-id: ${GITHUB_CLIENT_ID:88c69e87b2e50d2dab4d}\n            client-secret: ${GITHUB_CLIENT_SECRET:819ac59f86c2b56c5ea0540e3d427df3c1129709}\n            scope: user:email, read:user\n            client-name: Sign in with GitHub\n        provider:\n          github:\n            user-name-attribute: login','13da0e9dfe52f9d8636ebb170070c340','2022-10-22 08:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','I',''),
-
-(0,6,'vains-admin-client-prod.yaml','DEFAULT_GROUP','vains-cloud-template','management:\n  endpoints:\n    web:\n      exposure:\n        #开放所有页面节点  默认只开启了health、info两个节点\n        include: \'*\'\n  # endpoint:\n  #   logfile:\n  #     external-file: ./logs/${spring.application.name}/web_admin.log\n    health:\n      #显示健康具体信息  默认不会显示详细信息\n      show-details: always\n# 利用info端点，加入版本等信息\ninfo:\n  versin: 1.0-SNAPSHOT \n  name: ${spring.application.name}\n  group: com.vains\n  description: 项目监控服务\n  # 自定义信息\n  author: vains\n\n# 监控客户端配置\nspring:\n  boot:\n    admin:\n      client:\n        # url: http://127.0.0.1:5100/admin-server\n        url: http://k7fsqkhtbx.cdhttp.cn/monitor\n\n# 日志文件路径\nlogging:\n  file:\n    path: ./logs/${spring.application.name}\n\n# 白名单\nvains:\n  white-list:\n    uris: /assets/**,/sba-settings.js,/actuator/**,/user/getByUsername/**','dd8f25e9a9ac598779082af0fe6a4f61','2022-10-22 08:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','I',''),
-
-(0,7,'swagger-prod.yaml','DEFAULT_GROUP','vains-cloud-template','# ===== 自定义swagger配置 ===== #\nswagger:\n  enable: true\n  application-name: ${spring.application.name}\n  application-version: 1.0\n  application-description: 接口文档\n  try-host: http://localhost:${server.port}\nspring:\n  mvc:\n    pathmatch:\n      matching-strategy: ant_path_matcher','48cc9bbcab5f8ff70831079d56cd9ef2','2022-10-22 08:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','I',''),
-
-(0,8,'vains-search-prod.yaml','DEFAULT_GROUP','vains-cloud-template','server:\n  port: 5300\nspring:\n  security:\n    oauth2:\n      resourceserver:\n        jwt:\n          # issuer-uri: http://localhost:5000\n          issuer-uri: http://kwqqr48rgo.cdhttp.cn\n          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/oauth2/jwks\n  boot:\n    admin:\n      ui:\n        # public-url: http://127.0.0.1:5100/admin-server\n        public-url: http://k7fsqkhtbx.cdhttp.cn:80/admin-server','075ce1d90d3574daf55ff4d70f4f219f','2022-10-22 08:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','I',''),
-
-(0,9,'vains-monitor-prod.yaml','DEFAULT_GROUP','vains-cloud-template','server:\n  port: 5200\nspring:\n  boot:\n    admin:\n      ui:\n        # public-url: http://127.0.0.1:5100/admin-server\n        # public-url: http://k7fsqkhtbx.cdhttp.cn:80/monitor\n        public-url: ${boot.admin.ui}','67917fbeeb2288e173525c6580146262','2022-10-22 08:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','I',''),
-
-(0,10,'vains-monitor-dev.yaml','DEFAULT_GROUP','vains-cloud-template','server:\n  port: 5200\nspring:\n  security:\n    oauth2:\n      resourceserver:\n        jwt:\n          issuer-uri: http://localhost:5000\n          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/oauth2/jwks\n  boot:\n    admin:\n      ui:\n        public-url: http://127.0.0.1:5100/admin-server','d42313435b1474ebe6a760c0d5d755f4','2022-10-22 08:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','I',''),
-
-(0,11,'vains-flowable-prod.yaml','DEFAULT_GROUP','vains-cloud-template','server:\n  port: 5400\nspring:\n  security:\n    oauth2:\n      resourceserver:\n        jwt:\n          # issuer-uri: http://localhost:5000\n          issuer-uri: http://kwqqr48rgo.cdhttp.cn\n          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/oauth2/jwks\n  datasource:\n    username: root\n    password: root\n    driver-class-name: com.mysql.cj.jdbc.Driver\n    url: jdbc:mysql://localhost:3306/vains-flowable?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&serverTimezone=Asia/Shanghai','59c3ee2f01b0c66b32513a77cfcf6471','2022-10-22 08:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','I',''),
-
-(0,12,'vains-system-prod.yaml','DEFAULT_GROUP','vains-cloud-template','server:\n  port: 5500\nspring:\n  datasource:\n    username: ${database.username}\n    password: ${database.password}\n    driver-class-name: ${database.driver-class-name}\n    url: jdbc:mysql://${database.url}/vains-system?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&serverTimezone=Asia/Shanghai\nmybatis-plus:\n  typeEnumsPackage: com.vains.enums\n  mapper-locations:\n    - classpath:com/vains/mapper/xml/*Mapper.xml\n  global-config:\n    db-config:\n      logic-delete-field: deleted\n      logic-delete-value: 1\n      logic-not-delete-value: 0','4c5a6ae41a84bab3662a3bc3e34c7271','2022-10-22 08:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','I',''),
-
-(0,13,'vains-common-prod.yaml','DEFAULT_GROUP','vains-cloud-template','# 数据库链接配置\ndatabase:\n  url: 3967b980e034.c.methodot.com:34467\n  username: root\n  password: 123456\n  driver-class-name: com.mysql.cj.jdbc.Driver \n# Security 回调地址设置\nsecurity:\n  client:\n    redirect-uri: http://k7fsqkhtbx.cdhttp.cn/code/redirect\n    redirect-uri-template: http://k7fsqkhtbx.cdhttp.cn/login/oauth2/code/{registrationId}\n# Security 请求白名单\nvains:\n  white-list:\n    uris: /assets/**,/sba-settings.js,/actuator/**,/swagger-ui/**,/swagger-resources/**,/*/v3/api-docs,/v3/api-docs,/webjars/**,/*/oauth2/token,/nacos/**\n# 设置项目监控地址\nboot:\n  admin:\n    ui: http://k7fsqkhtbx.cdhttp.cn:80/monitor\nspring:\n  # Security Resource Server 配置\n  security:\n    oauth2:\n      resourceserver:\n        jwt:\n          # issuer-uri: http://localhost:5000\n          # issuer-uri: http://kwqqr48rgo.cdhttp.cn\n          issuer-uri: http://kwqqr48rgo.cdhttp.cn\n          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/oauth2/jwks\n  # Spring boot Admin 监控客户端配置\n  boot:\n    admin:\n      client:\n        # url: http://127.0.0.1:5100/admin-server\n        # url: http://k7fsqkhtbx.cdhttp.cn/monitor\n        url: http://k7fsqkhtbx.cdhttp.cn/monitor\n  # Spring boot 2.6版本以后pathmatch策略变化，导致swagger报错，改回原先的策略\n  mvc:\n    pathmatch:\n      matching-strategy: ant_path_matcher\n# Spring boot 监控配置\nmanagement:\n  endpoints:\n    web:\n      exposure:\n        #开放所有页面节点  默认只开启了health、info两个节点\n        include: \'*\'\n    # endpoint:\n    #   logfile:\n    #     external-file: ./logs/${spring.application.name}/web_admin.log\n    health:\n      #显示健康具体信息  默认不会显示详细信息\n      show-details: always\n# 利用info端点，加入版本等信息\ninfo:\n  versin: 1.0\n  name: ${spring.application.name}\n  group: com.vains\n  description: 项目监控服务\n  # 自定义信息\n  author: vains\n# 日志文件路径\nlogging:\n  file:\n    path: ./logs/${spring.application.name}\n# ===== 自定义swagger配置 ===== #\nswagger:\n  enable: true\n  application-name: ${spring.application.name}\n  application-version: 1.0\n  application-description: 接口文档\n  try-host: http://localhost:${server.port}\n  oauth2: \n    # oauth2认证\n    authorize-uri: http://kwqqr48rgo.cdhttp.cn/oauth2/authorize\n    access-token-uri: http://kwqqr48rgo.cdhttp.cn/oauth2/token\n','5489e6e3151ac256d986400e6cbafdae','2022-10-22 08:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','I',''),
-
-(0,14,'vains-common-dev.yaml','DEFAULT_GROUP','vains-cloud-template','# 数据库链接配置\ndatabase:\n  url: 127.0.0.1:3306\n  username: root\n  password: root\n  driver-class-name: com.mysql.cj.jdbc.Driver\nsecurity:\n  client:\n    redirect-uri: http://127.0.0.1:5100/code/redirect\n    redirect-uri-template: http://127.0.0.1:5100/login/oauth2/code/{registrationId}\n# Security请求白名单\nvains:\n  white-list:\n    uris: /assets/**,/sba-settings.js,/actuator/**,/swagger-ui/**,/swagger-resources/**,/*/v3/api-docs,/v3/api-docs,/webjars/**,/*/oauth2/token\n# 设置项目监控地址\nboot:\n  admin:\n    ui: http://localhost:5100/monitor\nspring:\n  # Security Resource Server 配置\n  security:\n    oauth2:\n      resourceserver:\n        jwt:\n          # issuer-uri: http://localhost:5000\n          # issuer-uri: http://kwqqr48rgo.cdhttp.cn\n          issuer-uri: http://127.0.0.1:5000\n          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/oauth2/jwks\n  # Spring boot Admin 监控客户端配置\n  boot:\n    admin:\n      client:\n        # url: http://127.0.0.1:5100/admin-server\n        # url: http://k7fsqkhtbx.cdhttp.cn/monitor\n        url: http://localhost:5100/monitor\n  # Spring boot 2.6版本以后pathmatch策略变化，导致swagger报错，改回原先的策略\n  mvc:\n    pathmatch:\n      matching-strategy: ant_path_matcher\n# Spring boot 监控配置\nmanagement:\n  endpoints:\n    web:\n      exposure:\n        #开放所有页面节点  默认只开启了health、info两个节点\n        include: \'*\'\n    # endpoint:\n    #   logfile:\n    #     external-file: ./logs/${spring.application.name}/web_admin.log\n    health:\n      #显示健康具体信息  默认不会显示详细信息\n      show-details: always\n# 利用info端点，加入版本等信息\ninfo:\n  versin: 1.0\n  name: ${spring.application.name}\n  group: com.vains\n  description: 项目监控服务\n  # 自定义信息\n  author: vains\n# 日志文件路径\nlogging:\n  file:\n    path: ./logs/${spring.application.name}\n# ===== 自定义swagger配置 ===== #\nswagger:\n  enable: true\n  application-name: ${spring.application.name}\n  application-version: 1.0\n  application-description: 接口文档\n  try-host: http://localhost:${server.port}\n  oauth2: \n    authorize-uri: http://127.0.0.1:5000/oauth2/authorize\n    access-token-uri: http://127.0.0.1:5000/oauth2/token\n','cc66038f6979cd0e82b4a218c750be57','2022-10-22 08:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','I',''),
-
-(0,15,'vains-gateway-dev.yaml','DEFAULT_GROUP','vains-cloud-template','server:\n  port: 5100\nspring:\n  security:\n    oauth2:\n      client:\n        provider:\n          spring:\n            issuer-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}\n            user-info-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/user\n        registration:\n          admin-oidc:\n            provider: spring\n            client-id: admin\n            client-secret: 123456\n            authorization-grant-type: authorization_code\n            redirect-uri-template: ${security.client.redirect-uri-template}\n            scope: user.userInfo\n            client-name: admin-oidc\n            client_authentication_method: client_secret_basic\n          gateway-oidc:\n            provider: spring\n            client-id: gateway\n            client-secret: 123456\n            authorization-grant-type: authorization_code\n            redirect-uri: ${security.client.redirect-uri}\n            # redirect-uri-template: \"{baseUrl}/login/oauth2/code/{registrationId}\"\n            # redirect-uri: \"http://127.0.0.1:8001/code/redirect\"\n            scope: all\n            client-name: gateway-oidc\n            client_authentication_method: client_secret_basic\n          messaging-client-client-credentials:\n            provider: spring\n            client-id: admin\n            client-secret: 123456\n            authorization-grant-type: client_credentials\n            scope: user.photos,user.userInfo\n            client-name: messaging-client-client-credentials\n            client_authentication_method: client_secret_basic\n  cloud:\n    gateway:\n      globalcors:        \n        cors-configurations:\n          \'[/**]\': \n            allowedOrigins: \"http://localhost:3000\"\n            allowedHeaders: \"*\"\n            allowedMethods:\n            - GET\n            - POST\n            - DELETE\n            - PUT\n        add-to-simple-url-handler-mapping: true\n      routes:\n      - id: monitor\n        uri: lb://vains-monitor\n        predicates:\n        - Path=/monitor/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n      - id: oauth2\n        uri: lb://vains-authorization-server\n        predicates:\n        - Path=/oauth2/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n        - PreserveHostHeader\n      - id: search\n        uri: lb://vains-search\n        predicates:\n        - Path=/search/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n      - id: flowable\n        uri: lb://vains-flowable\n        predicates:\n        - Path=/flowable/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n      - id: system\n        uri: lb://vains-system\n        predicates:\n        - Path=/system/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=','85ebd4a0405ce69a203bcdd1160f5c4e','2022-10-22 08:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','I',''),
-
-(0,16,'vains-system-dev.yaml','DEFAULT_GROUP','vains-cloud-template','server:\n  port: 5500\nspring:\n  datasource:\n    username: ${database.username}\n    password: ${database.password}\n    driver-class-name: ${database.driver-class-name}\n    url: jdbc:mysql://${database.url}/vains-system?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&serverTimezone=Asia/Shanghai\nmybatis-plus:\n  typeEnumsPackage: com.vains.enums\n  mapper-locations:\n    - classpath:com/vains/mapper/xml/*Mapper.xml\n  global-config:\n    db-config:\n      logic-delete-field: deleted\n      logic-delete-value: 1\n      logic-not-delete-value: 0','4c5a6ae41a84bab3662a3bc3e34c7271','2022-10-22 08:40:23','2022-10-22 16:40:23',NULL,'58.248.159.14','I',''),
-
-(13,17,'vains-common-prod.yaml','DEFAULT_GROUP','vains-cloud-template','# 数据库链接配置\ndatabase:\n  url: 3967b980e034.c.methodot.com:34467\n  username: root\n  password: 123456\n  driver-class-name: com.mysql.cj.jdbc.Driver \n# Security 回调地址设置\nsecurity:\n  client:\n    redirect-uri: http://k7fsqkhtbx.cdhttp.cn/code/redirect\n    redirect-uri-template: http://k7fsqkhtbx.cdhttp.cn/login/oauth2/code/{registrationId}\n# Security 请求白名单\nvains:\n  white-list:\n    uris: /assets/**,/sba-settings.js,/actuator/**,/swagger-ui/**,/swagger-resources/**,/*/v3/api-docs,/v3/api-docs,/webjars/**,/*/oauth2/token,/nacos/**\n# 设置项目监控地址\nboot:\n  admin:\n    ui: http://k7fsqkhtbx.cdhttp.cn:80/monitor\nspring:\n  # Security Resource Server 配置\n  security:\n    oauth2:\n      resourceserver:\n        jwt:\n          # issuer-uri: http://localhost:5000\n          # issuer-uri: http://kwqqr48rgo.cdhttp.cn\n          issuer-uri: http://kwqqr48rgo.cdhttp.cn\n          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/oauth2/jwks\n  # Spring boot Admin 监控客户端配置\n  boot:\n    admin:\n      client:\n        # url: http://127.0.0.1:5100/admin-server\n        # url: http://k7fsqkhtbx.cdhttp.cn/monitor\n        url: http://k7fsqkhtbx.cdhttp.cn/monitor\n  # Spring boot 2.6版本以后pathmatch策略变化，导致swagger报错，改回原先的策略\n  mvc:\n    pathmatch:\n      matching-strategy: ant_path_matcher\n# Spring boot 监控配置\nmanagement:\n  endpoints:\n    web:\n      exposure:\n        #开放所有页面节点  默认只开启了health、info两个节点\n        include: \'*\'\n    # endpoint:\n    #   logfile:\n    #     external-file: ./logs/${spring.application.name}/web_admin.log\n    health:\n      #显示健康具体信息  默认不会显示详细信息\n      show-details: always\n# 利用info端点，加入版本等信息\ninfo:\n  versin: 1.0\n  name: ${spring.application.name}\n  group: com.vains\n  description: 项目监控服务\n  # 自定义信息\n  author: vains\n# 日志文件路径\nlogging:\n  file:\n    path: ./logs/${spring.application.name}\n# ===== 自定义swagger配置 ===== #\nswagger:\n  enable: true\n  application-name: ${spring.application.name}\n  application-version: 1.0\n  application-description: 接口文档\n  try-host: http://localhost:${server.port}\n  oauth2: \n    # oauth2认证\n    authorize-uri: http://kwqqr48rgo.cdhttp.cn/oauth2/authorize\n    access-token-uri: http://kwqqr48rgo.cdhttp.cn/oauth2/token\n','5489e6e3151ac256d986400e6cbafdae','2022-10-22 08:42:53','2022-10-22 16:42:53','nacos','58.248.159.14','U',''),
-
-(4,18,'vains-gateway-prod.yaml','DEFAULT_GROUP','vains-cloud-template','server:\n  port: 5100\nspring:\n  security:\n    oauth2:\n      client:\n        provider:\n          spring:\n            issuer-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}\n            user-info-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/user\n        registration:\n          admin-oidc:\n            provider: spring\n            client-id: admin\n            client-secret: 123456\n            authorization-grant-type: authorization_code\n            redirect-uri-template: ${security.client.redirect-uri-template}\n            scope: user.userInfo\n            client-name: admin-oidc\n            client_authentication_method: client_secret_basic\n          gateway-oidc:\n            provider: spring\n            client-id: gateway\n            client-secret: 123456\n            authorization-grant-type: authorization_code\n            redirect-uri: ${security.client.redirect-uri}\n            # redirect-uri-template: \"{baseUrl}/login/oauth2/code/{registrationId}\"\n            # redirect-uri: \"http://127.0.0.1:8001/code/redirect\"\n            scope: all\n            client-name: gateway-oidc\n            client_authentication_method: client_secret_basic\n          messaging-client-client-credentials:\n            provider: spring\n            client-id: admin\n            client-secret: 123456\n            authorization-grant-type: client_credentials\n            scope: user.photos,user.userInfo\n            client-name: messaging-client-client-credentials\n            client_authentication_method: client_secret_basic\n  cloud:\n    gateway:\n      globalcors:        \n        cors-configurations:\n          \'[/**]\': \n            allowedOrigins: \n            - \"http://localhost:3000\"\n            - \"http://127.0.0.1:3000\"\n            allowedHeaders: \"*\"\n            allowedMethods:\n            - GET\n            - POST\n            - DELETE\n            - PUT\n        add-to-simple-url-handler-mapping: true\n      routes:\n      - id: monitor\n        uri: lb://vains-monitor\n        predicates:\n        - Path=/monitor/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n      - id: oauth2\n        uri: lb://vains-authorization-server\n        predicates:\n        - Path=/oauth2/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n        - PreserveHostHeader\n      - id: search\n        uri: lb://vains-search\n        predicates:\n        - Path=/search/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n      - id: flowable\n        uri: lb://vains-flowable\n        predicates:\n        - Path=/flowable/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=\n      - id: system\n        uri: lb://vains-system\n        predicates:\n        - Path=/system/**\n        filters:\n        - StripPrefix=1\n        - TokenRelay=','d2bcb11163d7e10f7e5d36c6c7025121','2022-10-27 06:19:41','2022-10-27 14:19:41','nacos','59.41.210.54','U','');
-
-UNLOCK TABLES;
-
-/*Table structure for table `permissions` */
-
-DROP TABLE IF EXISTS `permissions`;
-
-CREATE TABLE `permissions` (
-`role` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-`resource` varchar(512) COLLATE utf8_unicode_ci NOT NULL,
-`action` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
-UNIQUE KEY `uk_role_permission` (`role`,`resource`,`action`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-/*Data for the table `permissions` */
-
-LOCK TABLES `permissions` WRITE;
-
-UNLOCK TABLES;
-
-/*Table structure for table `roles` */
-
-DROP TABLE IF EXISTS `roles`;
-
-CREATE TABLE `roles` (
-`username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-`role` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-UNIQUE KEY `idx_user_role` (`username`,`role`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-/*Data for the table `roles` */
-
-LOCK TABLES `roles` WRITE;
-
-insert  into `roles`(`username`,`role`) values
-
-('nacos','ROLE_ADMIN');
-
-UNLOCK TABLES;
-
-/*Table structure for table `tenant_capacity` */
-
-DROP TABLE IF EXISTS `tenant_capacity`;
-
-CREATE TABLE `tenant_capacity` (
-`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-`tenant_id` varchar(128) COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT 'Tenant ID',
-`quota` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '配额，0表示使用默认值',
-`usage` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '使用量',
-`max_size` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '单个配置大小上限，单位为字节，0表示使用默认值',
-`max_aggr_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '聚合子配置最大个数',
-`max_aggr_size` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '单个聚合数据的子配置大小上限，单位为字节，0表示使用默认值',
-`max_history_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最大变更历史数量',
-`gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-`gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
-PRIMARY KEY (`id`),
-UNIQUE KEY `uk_tenant_id` (`tenant_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='租户容量信息表';
-
-/*Data for the table `tenant_capacity` */
-
-LOCK TABLES `tenant_capacity` WRITE;
-
-UNLOCK TABLES;
-
-/*Table structure for table `tenant_info` */
-
-DROP TABLE IF EXISTS `tenant_info`;
-
-CREATE TABLE `tenant_info` (
-`id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
-`kp` varchar(128) COLLATE utf8_bin NOT NULL COMMENT 'kp',
-`tenant_id` varchar(128) COLLATE utf8_bin DEFAULT '' COMMENT 'tenant_id',
-`tenant_name` varchar(128) COLLATE utf8_bin DEFAULT '' COMMENT 'tenant_name',
-`tenant_desc` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'tenant_desc',
-`create_source` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT 'create_source',
-`gmt_create` bigint(20) NOT NULL COMMENT '创建时间',
-`gmt_modified` bigint(20) NOT NULL COMMENT '修改时间',
-PRIMARY KEY (`id`),
-UNIQUE KEY `uk_tenant_info_kptenantid` (`kp`,`tenant_id`),
-KEY `idx_tenant_id` (`tenant_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='tenant_info';
-
-/*Data for the table `tenant_info` */
-
-LOCK TABLES `tenant_info` WRITE;
-
-UNLOCK TABLES;
-
-/*Table structure for table `users` */
-
-DROP TABLE IF EXISTS `users`;
-
-CREATE TABLE `users` (
-`username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-`password` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
-`enabled` tinyint(1) NOT NULL,
-PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-/*Data for the table `users` */
-
-LOCK TABLES `users` WRITE;
-
-insert  into `users`(`username`,`password`,`enabled`) values
-
-('nacos','$2a$10$EuWPZHzz32dJN7jexM34MOeYirDdFAZm2kuWj7VEOJhhZkDrxfvUu',1);
-
-UNLOCK TABLES;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
