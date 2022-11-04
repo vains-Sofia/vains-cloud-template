@@ -103,4 +103,9 @@ public class Oauth2RegisteredClient implements Serializable {
     @TableField(typeHandler = TokenSettingsTypeHandler.class)
     private TokenSettings tokenSettings;
 
+    /**
+     * 对称加密后的秘钥
+     */
+    private String copySecret;
+
 }

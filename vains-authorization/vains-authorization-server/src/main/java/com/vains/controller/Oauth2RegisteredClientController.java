@@ -12,7 +12,7 @@ import com.vains.model.request.UpdateClientRequest;
 import com.vains.model.request.UpdateClientScopesRequest;
 import com.vains.model.response.FindClientResponse;
 import com.vains.service.IOauth2RegisteredClientService;
-import com.vains.util.ClientUtils;
+import com.vains.util.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -60,7 +60,10 @@ public class Oauth2RegisteredClientController {
         if (registeredClient == null) {
             return Result.error("客户端不存在！");
         }
-        return Result.success(FindClientResponse.covert(registeredClient));
+        FindClientResponse clientResponse = FindClientResponse.covert(registeredClient);
+        String decrypt = SecurityUtils.aesDecrypt(registeredClient.getCopySecret(), registeredClient.getClientId());
+        clientResponse.setClientSecret(decrypt);
+        return Result.success(clientResponse);
     }
 
     @ApiOperation("根据客户端Id获取客户端")
@@ -71,6 +74,9 @@ public class Oauth2RegisteredClientController {
         if (registeredClient == null) {
             return Result.error("客户端不存在！");
         }
+        FindClientResponse clientResponse = FindClientResponse.covert(registeredClient);
+        String decrypt = SecurityUtils.aesDecrypt(registeredClient.getCopySecret(), registeredClient.getClientId());
+        clientResponse.setClientSecret(decrypt);
         return Result.success(FindClientResponse.covert(registeredClient));
     }
 
@@ -83,7 +89,10 @@ public class Oauth2RegisteredClientController {
         IPage<Oauth2RegisteredClient> iPage = new Page<>(findClient.getCurrent(), findClient.getSize());
         oauth2RegisteredClientService.page(iPage, wrapper);
         IPage<FindClientResponse> page = new Page<>(iPage.getCurrent(), iPage.getSize());
-        List<FindClientResponse> findClientResponses = iPage.getRecords().stream().map(FindClientResponse::covert).collect(Collectors.toList());
+        List<FindClientResponse> findClientResponses = iPage.getRecords().stream().peek(client -> {
+            String decrypt = SecurityUtils.aesDecrypt(client.getCopySecret(), client.getClientId());
+            client.setClientSecret(decrypt);
+        }).map(FindClientResponse::covert).collect(Collectors.toList());
         page.setRecords(findClientResponses);
         return Result.success(page);
     }

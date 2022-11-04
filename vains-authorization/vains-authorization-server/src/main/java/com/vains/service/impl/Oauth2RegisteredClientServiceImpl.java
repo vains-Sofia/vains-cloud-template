@@ -9,6 +9,7 @@ import com.vains.model.request.UpdateClientRequest;
 import com.vains.service.IOauth2RegisteredClientService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.vains.util.ClientUtils;
+import com.vains.util.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Primary;
@@ -108,6 +109,7 @@ public class Oauth2RegisteredClientServiceImpl extends ServiceImpl<Oauth2Registe
         Oauth2RegisteredClient client = new Oauth2RegisteredClient();
         client.setId(String.valueOf(id));
         client.setClientProfile(clientRequest.getClientProfile());
+        client.setCopySecret(SecurityUtils.aesEncrypt(clientRequest.getClientSecret(), clientRequest.getClientId()));
         this.updateById(client);
     }
 
@@ -116,6 +118,7 @@ public class Oauth2RegisteredClientServiceImpl extends ServiceImpl<Oauth2Registe
         Oauth2RegisteredClient client = new Oauth2RegisteredClient();
         client.setId(updateClient.getId());
         client.setClientId(updateClient.getClientId());
+        client.setClientSecret(passwordEncoder.encode(updateClient.getClientSecret()));
         client.setClientName(updateClient.getClientName());
         client.setRedirectUris(updateClient.getRedirectUris());
         client.setClientProfile(updateClient.getClientProfile());
@@ -123,6 +126,7 @@ public class Oauth2RegisteredClientServiceImpl extends ServiceImpl<Oauth2Registe
         client.setClientSettings(ClientUtils.resolveClientSettings(updateClient.getClientSettings()));
         client.setAuthorizationGrantTypes(updateClient.getAuthorizationGrantTypes().stream().map(ClientUtils::resolveAuthorizationGrantType).collect(Collectors.toSet()));
         client.setClientAuthenticationMethods(updateClient.getClientAuthenticationMethods().stream().map(ClientUtils::resolveClientAuthenticationMethod).collect(Collectors.toSet()));
+        client.setCopySecret(SecurityUtils.aesEncrypt(updateClient.getClientSecret(), updateClient.getClientId()));
         this.updateById(client);
     }
 

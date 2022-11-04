@@ -126,6 +126,17 @@ public class DefaultExceptionHandlerAdvice {
     }
 
     /**
+     * 捕获其它异常
+     *
+     * @param e 具体地校验异常
+     * @return 返回处理后的异常信息
+     */
+    @ExceptionHandler(Exception.class)
+    public Result<String> exception(Exception e) {
+        return Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
+    }
+
+    /**
      * 转换FieldError列表为错误提示信息
      *
      * @param fieldErrors 字段异常信息

@@ -14,9 +14,12 @@ import org.springframework.security.oauth2.server.resource.authentication.Abstra
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.util.StringUtils;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -99,9 +102,9 @@ public class SecurityUtils {
     }
 
     /**
-     * 获取用户id
-     * @return 返回登录用户的id
-     */
+    * 获取用户id
+    * @return 返回登录用户的id
+    */
     public static Integer getUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!authentication.isAuthenticated()) {
@@ -116,6 +119,59 @@ public class SecurityUtils {
         JwtAuthenticationToken token = (JwtAuthenticationToken) authentication;
         // 获取jwt的id，也就是用户id
         return Integer.valueOf(token.getToken().getId());
+    }
+
+    /**
+    * aes加密
+    * @param content 待加密数据
+    * @param key 密钥
+    * @return 返回加密后的数据，返回 null 代表加密失败
+    */
+    public static String aesEncrypt(String content, String key) {
+        if (key.length() > 16) {
+            key = key.substring(0, 16);
+        }
+        try {
+            //指定加密算法
+            Cipher cipher = Cipher.getInstance("AES");
+            //创建加密规则：指定key和加密类型
+            SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(), "AES");
+            //指定加密模式为加密，指定加密规则
+            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+            //调用加密方法
+            byte[] result = cipher.doFinal(content.getBytes());
+            //用Base64编码
+            return new String(Base64.getEncoder().encode(result));
+        } catch (Exception e) {
+            log.warn("加密[{}]失败.原因：{}", content, e.getMessage());
+        }
+        return null;
+    }
+
+    /**
+    * aes解密
+    * @param content 待解密数据
+    * @param key 密钥
+    * @return 原数据，返回 null 代表解密失败
+    */
+    public static String aesDecrypt(String content, String key) {
+        if (key.length() > 16) {
+            key = key.substring(0, 16);
+        }
+        try {
+            //Base64解码
+            byte[] result = Base64.getDecoder().decode(content);
+            //指定加密算法
+            Cipher cipher = Cipher.getInstance("AES");
+            //创建加密规则：指定key和加密类型
+            SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(), "AES");
+            //指定加密模式为解密，指定加密规则
+            cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
+            return new String(cipher.doFinal(result));
+        } catch (Exception e) {
+            log.warn("解密[{}]失败.原因：{}", content, e.getMessage());
+        }
+        return null;
     }
 
 }

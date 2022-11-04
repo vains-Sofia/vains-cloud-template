@@ -10,6 +10,7 @@ import org.springframework.security.oauth2.server.authorization.config.TokenSett
 import org.springframework.util.ObjectUtils;
 
 import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -96,10 +97,10 @@ public class ClientUtils {
         if (tokenSettingsModel == null) {
             tokenSettingsModel = new TokenSettingsModel();
         }
-        Duration accessTokenTimeToLive = Duration.ofSeconds(tokenSettingsModel.getAccessTokenTimeToLive() == null ? 7200L : tokenSettingsModel.getAccessTokenTimeToLive());
-        settings.put(ACCESS_TOKEN_TIME_TO_LIVE, accessTokenTimeToLive);
-        Duration refreshTokenTimeToLive = Duration.ofSeconds(tokenSettingsModel.getRefreshTokenTimeToLive() == null ? 604800L : tokenSettingsModel.getRefreshTokenTimeToLive());
-        settings.put(REFRESH_TOKEN_TIME_TO_LIVE, refreshTokenTimeToLive);
+        Duration accessTokenTimeToLive = Duration.of(tokenSettingsModel.getAccessTokenTimeToLive() == null ? 7200L : tokenSettingsModel.getAccessTokenTimeToLive(), ChronoUnit.valueOf(tokenSettingsModel.getAccessTokenTimeToLiveUnit()));
+        settings.put(ACCESS_TOKEN_TIME_TO_LIVE, Duration.ofSeconds(accessTokenTimeToLive.getSeconds()));
+        Duration refreshTokenTimeToLive = Duration.of(tokenSettingsModel.getRefreshTokenTimeToLive() == null ? 604800L : tokenSettingsModel.getRefreshTokenTimeToLive(), ChronoUnit.valueOf(tokenSettingsModel.getRefreshTokenTimeToLiveUnit()));
+        settings.put(REFRESH_TOKEN_TIME_TO_LIVE, Duration.ofSeconds(refreshTokenTimeToLive.getSeconds()));
         settings.put(REUSE_REFRESH_TOKENS, tokenSettingsModel.getReuseRefreshTokens() == null ? Boolean.FALSE :  tokenSettingsModel.getReuseRefreshTokens());
         // TODO 暂时默认使用RS256的方式加密
         settings.put(ID_TOKEN_SIGNATURE_ALGORITHM, SignatureAlgorithm.RS256);
@@ -116,6 +117,9 @@ public class ClientUtils {
         model.setReuseRefreshTokens(tokenSettings.isReuseRefreshTokens());
         model.setAccessTokenTimeToLive(tokenSettings.getAccessTokenTimeToLive().getSeconds());
         model.setRefreshTokenTimeToLive(tokenSettings.getRefreshTokenTimeToLive().getSeconds());
+        // TODO 设置默认单位，现在尚未有好的解决方案
+        model.setAccessTokenTimeToLiveUnit("SECONDS");
+        model.setRefreshTokenTimeToLiveUnit("SECONDS");
         return model;
     }
 

@@ -29,6 +29,10 @@ public class UpdateClientRequest {
     private String clientId;
 
     @NotBlank
+    @ApiModelProperty("客户端秘钥")
+    private String clientSecret;
+
+    @NotBlank
     @ApiModelProperty("客户端名称")
     private String clientName;
 
