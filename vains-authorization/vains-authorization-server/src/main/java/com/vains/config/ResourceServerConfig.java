@@ -47,18 +47,18 @@ public class ResourceServerConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         FederatedIdentityConfigurer federatedIdentityConfigurer = new FederatedIdentityConfigurer()
-                .oauth2UserHandler(new UserRepositoryOAuth2UserHandler());
+            .oauth2UserHandler(new UserRepositoryOAuth2UserHandler());
         http.cors().and().csrf().disable();
         http.headers().frameOptions().disable();
         http.authorizeRequests(authorizeRequests ->
-                authorizeRequests.mvcMatchers("/actuator/**", "/login").permitAll()
-                        .antMatchers("/css/**", "/image/**").permitAll()
-                        .antMatchers(whiteListProperties.getUris()).permitAll()
-                        .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .anyRequest().authenticated()
+            authorizeRequests.mvcMatchers("/actuator/**", "/login", "/oauth2/authenticationError").permitAll()
+                .antMatchers("/css/**", "/image/**").permitAll()
+                .antMatchers(whiteListProperties.getUris()).permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .anyRequest().authenticated()
         ).formLogin();
         http.oauth2ResourceServer().jwt()
-                .and().accessDeniedHandler(SecurityUtils::exceptionHandler).authenticationEntryPoint(SecurityUtils::exceptionHandler);
+            .and().accessDeniedHandler(SecurityUtils::exceptionHandler).authenticationEntryPoint(SecurityUtils::exceptionHandler);
         http.apply(federatedIdentityConfigurer);
         return http.build();
     }

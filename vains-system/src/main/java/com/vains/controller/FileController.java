@@ -1,5 +1,6 @@
 package com.vains.controller;
 
+import com.vains.enums.FileHandleTypeEnum;
 import com.vains.model.Result;
 import com.vains.strategy.context.FileContext;
 import io.swagger.annotations.Api;
@@ -27,7 +28,7 @@ public class FileController {
     @PostMapping("/upload")
     @ApiOperation("上传文件")
     public Result<List<String>> upload(@RequestParam("file") MultipartFile file) {
-        return Result.success(fileContext.getInstance("disk").upload(Collections.singletonList(file)));
+        return Result.success(fileContext.getInstance(FileHandleTypeEnum.DISK_FILE.getValue()).upload(Collections.singletonList(file)));
     }
 
 }

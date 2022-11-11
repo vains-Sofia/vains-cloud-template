@@ -12,13 +12,19 @@ import org.springframework.security.oauth2.server.resource.BearerTokenError;
 import org.springframework.security.oauth2.server.resource.BearerTokenErrorCodes;
 import org.springframework.security.oauth2.server.resource.authentication.AbstractOAuth2TokenAuthenticationToken;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponents;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -37,16 +43,53 @@ public class SecurityUtils {
 
     /**
      * 认证与鉴权失败回调
-     * @param request 当前请求
+     *
+     * @param request  当前请求
      * @param response 当前响应
-     * @param e 具体的异常信息
+     * @param e        具体的异常信息
      */
     public static void exceptionHandler(HttpServletRequest request, HttpServletResponse response, Throwable e) {
+        Map<String, String> parameters = getErrorParameter(request, response, e);
+        String wwwAuthenticate = computeWwwAuthenticateHeaderValue(parameters);
+        response.addHeader(HttpHeaders.WWW_AUTHENTICATE, wwwAuthenticate);
+        try {
+            response.setContentType(ContentType.APPLICATION_JSON.toString());
+            response.getWriter().write(JsonUtils.objectCovertToJson(parameters));
+            response.getWriter().flush();
+        } catch (IOException ex) {
+            log.error("写回错误信息失败", e);
+        }
+    }
+
+    /**
+     * 认证与鉴权失败回调，该方法会重定向至错误页面
+     *
+     * @param request  当前请求
+     * @param response 当前响应
+     * @param e        具体的异常信息
+     */
+    public static void exceptionHandlerForward(HttpServletRequest request, HttpServletResponse response, Throwable e) {
+        Map<String, String> parameters = getErrorParameter(request, response, e);
+        MultiValueMap<String, String> valueMap = new LinkedMultiValueMap<>(parameters.size());
+        parameters.forEach(valueMap::add);
+        UriComponents uriComponents = ServletUriComponentsBuilder.fromCurrentRequest()
+            .replacePath("/oauth2/authenticationError")
+            .replaceQueryParams(valueMap)
+            .encode(StandardCharsets.UTF_8)
+            .build();
+        try {
+            request.getRequestDispatcher(uriComponents.getPath() + "?" + uriComponents.getQuery()).forward(request, response);
+        } catch (IOException | ServletException ex) {
+            log.error("转发到错误提示页面失败", e);
+        }
+    }
+
+    private static Map<String, String> getErrorParameter(HttpServletRequest request, HttpServletResponse response, Throwable e) {
         Map<String, String> parameters = new LinkedHashMap<>();
         if (request.getUserPrincipal() instanceof AbstractOAuth2TokenAuthenticationToken) {
             parameters.put("error", BearerTokenErrorCodes.INSUFFICIENT_SCOPE);
             parameters.put("error_description",
-                    "The request requires higher privileges than provided by the access token.");
+                "The request requires higher privileges than provided by the access token.");
             parameters.put("error_uri", "https://tools.ietf.org/html/rfc6750#section-3.1");
             response.setStatus(HttpStatus.FORBIDDEN.value());
         }
@@ -67,20 +110,13 @@ public class SecurityUtils {
                 response.setStatus(((BearerTokenError) error).getHttpStatus().value());
             }
         }
-        String wwwAuthenticate = computeWwwAuthenticateHeaderValue(parameters);
-        response.addHeader(HttpHeaders.WWW_AUTHENTICATE, wwwAuthenticate);
         parameters.put("message", e.getMessage());
-        try {
-            response.setContentType(ContentType.APPLICATION_JSON.toString());
-            response.getWriter().write(JsonUtils.objectCovertToJson(parameters));
-            response.getWriter().flush();
-        } catch (IOException ex) {
-            log.error("写回错误信息失败", e);
-        }
+        return parameters;
     }
 
     /**
      * 生成放入请求头的错误信息
+     *
      * @param parameters 参数
      * @return 字符串
      */
@@ -102,9 +138,10 @@ public class SecurityUtils {
     }
 
     /**
-    * 获取用户id
-    * @return 返回登录用户的id
-    */
+     * 获取用户id
+     *
+     * @return 返回登录用户的id
+     */
     public static Integer getUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!authentication.isAuthenticated()) {
@@ -122,11 +159,12 @@ public class SecurityUtils {
     }
 
     /**
-    * aes加密
-    * @param content 待加密数据
-    * @param key 密钥
-    * @return 返回加密后的数据，返回 null 代表加密失败
-    */
+     * aes加密
+     *
+     * @param content 待加密数据
+     * @param key     密钥
+     * @return 返回加密后的数据，返回 null 代表加密失败
+     */
     public static String aesEncrypt(String content, String key) {
         if (key.length() > 16) {
             key = key.substring(0, 16);
@@ -149,11 +187,12 @@ public class SecurityUtils {
     }
 
     /**
-    * aes解密
-    * @param content 待解密数据
-    * @param key 密钥
-    * @return 原数据，返回 null 代表解密失败
-    */
+     * aes解密
+     *
+     * @param content 待解密数据
+     * @param key     密钥
+     * @return 原数据，返回 null 代表解密失败
+     */
     public static String aesDecrypt(String content, String key) {
         if (key.length() > 16) {
             key = key.substring(0, 16);

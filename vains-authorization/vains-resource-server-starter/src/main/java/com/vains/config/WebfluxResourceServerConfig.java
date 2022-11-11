@@ -6,7 +6,7 @@ import com.vains.util.SecurityUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.entity.ContentType;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
@@ -34,13 +34,14 @@ import java.util.Map;
 
 /**
  * 资源服务器配置
+ *  仅在webflux环境生效
  *
  * @author vains
  */
 @Slf4j
 @AllArgsConstructor
 @EnableWebFluxSecurity
-@ConditionalOnMissingClass({"javax.servlet.Filter"})
+@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
 @EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true, securedEnabled = true)
 public class WebfluxResourceServerConfig {
 

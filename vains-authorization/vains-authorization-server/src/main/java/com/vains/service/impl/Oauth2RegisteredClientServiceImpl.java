@@ -42,6 +42,8 @@ public class Oauth2RegisteredClientServiceImpl extends ServiceImpl<Oauth2Registe
     public void save(RegisteredClient registeredClient) {
         Oauth2RegisteredClient client = new Oauth2RegisteredClient();
         BeanUtils.copyProperties(registeredClient, client);
+        // 给个默认值
+        client.setCopySecret("1");
         this.save(client);
     }
 

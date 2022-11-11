@@ -8,6 +8,7 @@ import com.nimbusds.jose.proc.SecurityContext;
 import com.vains.constant.Constants;
 import com.vains.security.federated.FederatedIdentityConfigurer;
 import com.vains.security.federated.FederatedIdentityIdTokenCustomizer;
+import com.vains.util.SecurityUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
@@ -71,19 +72,29 @@ public class AuthorizationServerConfig {
 
         // 自定义授权同意页面
         authorizationServerConfigurer
-                .authorizationEndpoint(authorizationEndpoint ->
-                        authorizationEndpoint.consentPage(CUSTOM_CONSENT_PAGE_URI));
+            .authorizationEndpoint(authorizationEndpoint -> {
+                authorizationEndpoint.consentPage(CUSTOM_CONSENT_PAGE_URI);
+                // 设置认证异常处理
+                authorizationEndpoint.errorResponseHandler(SecurityUtils::exceptionHandlerForward);
+            });
+
+        // 客户端认证自定义
+        authorizationServerConfigurer.clientAuthentication(oAuth2ClientAuthenticationConfigurer ->
+            // 自定义认证失败
+            oAuth2ClientAuthenticationConfigurer.errorResponseHandler(SecurityUtils::exceptionHandler)
+        );
 
         RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
 
         http.headers().frameOptions().disable();
         http
-                .requestMatcher(endpointsMatcher)
-                .authorizeRequests(authorizeRequests ->
-                        authorizeRequests.anyRequest().authenticated()
-                )
-                .csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
-                .apply(authorizationServerConfigurer);
+            .requestMatcher(endpointsMatcher)
+            .authorizeRequests(authorizeRequests ->
+                authorizeRequests.mvcMatchers("/oauth2/authenticationError").permitAll()
+                    .anyRequest().authenticated()
+            )
+            .csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
+            .apply(authorizationServerConfigurer);
 
         // 添加允许跨域拦截器
         http.addFilter(corsFilter);
@@ -101,7 +112,8 @@ public class AuthorizationServerConfig {
 
     /**
      * 使用JdbcOperations进行OAuth2Authorization持久化。
-     * @param jdbcTemplate 持久化依赖对象
+     *
+     * @param jdbcTemplate               持久化依赖对象
      * @param registeredClientRepository 客户端Repository
      * @return OAuth2AuthorizationService JDBC 实现
      */
@@ -121,7 +133,7 @@ public class AuthorizationServerConfig {
         }
 
         CustomOauth2AuthorizationRowMapper oAuth2AuthorizationRowMapper =
-                new CustomOauth2AuthorizationRowMapper(registeredClientRepository);
+            new CustomOauth2AuthorizationRowMapper(registeredClientRepository);
 
         authorizationService.setAuthorizationRowMapper(oAuth2AuthorizationRowMapper);
         return authorizationService;
@@ -129,6 +141,7 @@ public class AuthorizationServerConfig {
 
     /**
      * 对jwt进行签名，设置秘钥
+     *
      * @return 既然涉及到签名，就涉及到签名算法，对称加密还是非对称加密，那么就需要加密的 密钥或者公私钥对。此处我们将 JWT的密钥或者公私钥对统一称为 JSON WEB KEY，即 JWK。
      */
     @Bean
@@ -149,25 +162,26 @@ public class AuthorizationServerConfig {
 
     /**
      * Jwk配置
+     *
      * @return RSAKey
      */
     public RSAKey generateRsa() {
         RSAPublicKey publicKey = (RSAPublicKey) keyPair().getPublic();
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair().getPrivate();
         return new RSAKey.Builder(publicKey)
-                .privateKey(privateKey)
-                .keyID(UUID.randomUUID().toString())
-                .build();
+            .privateKey(privateKey)
+            .keyID(UUID.randomUUID().toString())
+            .build();
     }
 
     @Bean
     public ProviderSettings providerSettings() {
         return ProviderSettings.builder()
-                // 配置获取token的端点路径
-                .tokenEndpoint("/oauth2/token")
-                // 设置发布者的url地址，一般是项目根路径
-                // 授权服务器也是一个资源服务器，这里就直接拿来用了
-                .issuer(oAuth2ResourceServerProperties.getJwt().getIssuerUri()).build();
+            // 配置获取token的端点路径
+            .tokenEndpoint("/oauth2/token")
+            // 设置发布者的url地址，一般是项目根路径
+            // 授权服务器也是一个资源服务器，这里就直接拿来用了
+            .issuer(oAuth2ResourceServerProperties.getJwt().getIssuerUri()).build();
     }
 
     @Bean

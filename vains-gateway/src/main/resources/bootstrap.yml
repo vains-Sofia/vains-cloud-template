@@ -4,7 +4,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: http://ebf6669c0582.c.methodot.com
+        server-addr: http://7395cfc5a759.c.methodot.com
       config:
         file-extension: yaml
         server-addr: ${spring.cloud.nacos.discovery.server-addr}

@@ -2,11 +2,8 @@ package com.vains.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.vains.enums.MenuTypeEnum;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * <p>
@@ -16,9 +13,9 @@ import java.time.LocalDateTime;
  * @author vains
  * @since 2022-03-25
  */
-@Getter
-@Setter
-public class SysMenu implements Serializable {
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class SysMenu extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -62,22 +59,5 @@ public class SysMenu implements Serializable {
      * 0:菜单,1:按钮,2:Api接口,3:其它
      */
     private MenuTypeEnum type;
-
-    /**
-     * 0:启用,1:删除
-     */
-    private Boolean deleted;
-
-    /**
-     * 创建时间
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-
-    /**
-     * 创建人
-     */
-    private Integer createUserId;
-
 
 }

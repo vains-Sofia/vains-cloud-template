@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>出错了</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #212529;
+            text-align: left;
+            background-color: #fff;
+        }
+
+        @media (min-width: 992px) {
+
+            .container {
+                max-width: 960px;
+            }
+
+        }
+
+        @media (min-width: 768px) {
+
+            .container {
+                max-width: 720px;
+            }
+        }
+
+        @media (min-width: 576px) {
+
+            .container {
+                max-width: 540px;
+            }
+
+        }
+
+        .container {
+            margin-top: 100px;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .text-center {
+            text-align: center !important;
+        }
+
+        .rounded {
+            border-radius: 0.25rem !important;
+        }
+
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+
+        img {
+            vertical-align: middle;
+            border-style: none;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            background-color: transparent;
+        }
+
+        a:hover {
+            cursor: pointer;
+            text-decoration: none;
+            background-color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="text-center">
+            <img src="../image/errorCircle.png" class="img-fluid rounded" alt="..." width="150px">
+            <br>
+            <span style="font-size: 25px;">
+                <span th:text="${error}"></span>
+                <span th:if="${error} != null">:&nbsp;</span>
+                <span th:text="${error_description}"></span>
+            </span>
+            <br><br>
+            <div th:if="${error_uri} != null" style="font-size: 14px; color: black;">
+                点击
+                <a class="link" th:href="${error_uri}" target="_blank">这里</a>
+                查看异常详情
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

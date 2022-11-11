@@ -107,4 +107,11 @@ public class Oauth2RegisteredClientController {
         return Result.success();
     }
 
+    @ApiOperation("根据id注销客户端")
+    @DeleteMapping("/deleteClient/{id}")
+    public Result<String> deleteClient(@PathVariable String id) {
+        oauth2RegisteredClientService.removeById(id);
+        return Result.success();
+    }
+
 }

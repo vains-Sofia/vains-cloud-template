@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsent;
@@ -98,6 +99,22 @@ public class AuthorizationConsentController {
         model.addAttribute("principalName", principal.getName());
 
         return "consent";
+    }
+
+    @ApiOperation("跳转至认证错误页面")
+    @GetMapping(value = "/oauth2/authenticationError")
+    public String consent(Model model,
+                          @RequestParam(value = "error", required = false) String error,
+                          @RequestParam(value = "message", required = false) String message,
+                          @RequestParam(value = "error_uri", required = false) String errorUri,
+                          @RequestParam(value = "error_description", required = false) String errorDescription,
+                          @RequestParam(value = OAuth2ParameterNames.SCOPE, required = false) String scope) {
+        model.addAttribute("error", error);
+        model.addAttribute("message", message);
+        model.addAttribute("error_uri", errorUri);
+        model.addAttribute("error_description", errorDescription);
+        model.addAttribute(OAuth2ParameterNames.SCOPE, scope);
+        return "authenticationError";
     }
 
     private static Set<ScopeWithDescription> withDescription(Set<String> scopes) {

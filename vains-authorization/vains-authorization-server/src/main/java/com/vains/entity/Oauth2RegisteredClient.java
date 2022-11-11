@@ -108,4 +108,9 @@ public class Oauth2RegisteredClient implements Serializable {
      */
     private String copySecret;
 
+    /**
+     * 是否删除
+     */
+    private Boolean deleted;
+
 }

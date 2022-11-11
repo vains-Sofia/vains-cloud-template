@@ -1,23 +1,23 @@
 package com.vains.config.covert;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import javax.servlet.Filter;
 import java.io.File;
 
 /**
  * 注册枚举转换类
+ *  仅在Servlet环境生效
  *
  * @author vains
  */
 @Configuration
 @RequiredArgsConstructor
-@ConditionalOnClass({Filter.class})
+@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class WebMvcConfig implements WebMvcConfigurer {
 
     private final EnumCovertFactory<?, ?> enumCovertFactory;

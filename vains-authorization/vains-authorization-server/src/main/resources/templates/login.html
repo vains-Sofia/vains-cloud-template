@@ -74,19 +74,26 @@
     let error = [[${ param.error }]]
     if (error) {
         if (window.Notification) {
-            Notification.requestPermission(function () {
-                if (Notification.permission === 'granted') {
-                    // 用户点击了允许
-                    let n = new Notification('登录失败', {
-                        body: error,
-                        icon: './image/logo.png'
-                    })
+            try {
+                Notification.requestPermission(function () {
+                    if (Notification.permission === 'granted') {
+                        // 用户点击了允许
+                        let n = new Notification('登录失败', {
+                            body: error,
+                            icon: './image/logo.png'
+                        })
 
-                    setTimeout(() => {
-                        n.close();
-                    }, 5000)
-                }
-            })
+                        setTimeout(() => {
+                            n.close();
+                        }, 5000)
+                    }
+                })
+            } catch(e) {
+                document.getElementById('alert').style.opacity = '0.8';
+                setTimeout(() => {
+                    document.getElementById('alert').style.opacity = '0';
+                }, 3000)
+            }
         } else {
             document.getElementById('alert').style.opacity = '0.8';
             setTimeout(() => {
